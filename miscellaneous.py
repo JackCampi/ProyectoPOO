@@ -3,6 +3,7 @@
 import prueba
 
 def SortMainList(_format, key):
+
     mainList = prueba.GetList()
     #mainList = readFortmat(_format)
     return SortList(mainList, key)
@@ -14,28 +15,28 @@ def SortList(_list, key):
     except:
         raise NameError("Invalid key, please check if the key is correct")
 
-def Search(_format, name):
+def SearchMainList(_format, name):
 
     mainList = SortMainList("music","name")
     #mainList = readFortmat(_format)
-    item = BinarySearch(mainList, name)
-    return item
+    return BinarySearch(mainList, name)
 
 def BinarySearch(_list, name):
     first = 0
     last = len(_list)-1
-    found = False
+    elementsFound = []
     #return 34
-    while first <= last and not found:
+    while first <= last:
         middle = (first + last) // 2
         if _list[middle]["name"] == name:
-            found = True
+            elementsFound.append(_list[middle])
+            first = middle + 1
         else:
             if name < _list[middle]["name"]:
                 last = middle - 1
             else:
                 first = middle + 1
-    return found
+    return elementsFound
 
-#print(SortMainList("music","name"))
-print(Search("music", "demons"))
+#print(SortMainList("music","type"))
+print(SearchMainList("music", "believer"))
