@@ -6,6 +6,9 @@ def SortList(_format, key):
     print("hola")
     mainList = prueba.GetList()
     #mainList = readFortmat(_format)
-    return sorted(mainList, key = lambda _dict : _dict[key])
+    try:
+        return sorted(mainList, key = lambda _dict : _dict[key])
+    except:
+        raise NameError("Invalid key, please check if the key is correct")
 
-print(SortList("music","name2"))
+print(SortList("music","name"))
