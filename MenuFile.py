@@ -1,3 +1,28 @@
+import miscellaneous
+
+def main():
+	"""Mantiene el programa abierto hasta que el usuario confirma que desea
+	cerrarlo."""
+	programOn = True
+	while programOn == True:
+		MainMenu()
+		programOn = LogOut()
+
+def LogOut():
+
+	"""Esta función de encarga de confirmar si el usuario desea cerrar el
+	programa. Devuelve un valor booleano que según la respuesta del usuario
+	rompe o no el bucle de la función main()."""
+
+	print("¿Desea salir de la aplicación? (SI \ NO)")
+	logOutConfirmation = input("su respuesta: ")
+	if logOutConfirmation.lower() == "si":
+		return False
+	elif logOutConfirmation.lower() == "no":
+		return True
+	else:
+		return LogOut()
+
 def MainMenu():
 
 	"""Esta función corresponde al menú principal en el cual el usuario
@@ -40,6 +65,12 @@ def Answer(options):
 	return answer
 
 def SecondMenu(_format):
+
+	"""Esta función se encarga de mostrar el segundo menú y las opciones para
+	que el usuario pueda ver sus archivos multimedia o las listas de reproducción.
+	La primera opción hace un llamado al tercer menú, mientras que la segunda
+	llama a un quinto menú donde puede visualizar las demás opciones."""
+
 	print("\n===================0===================\n")
 	print("\t"+ MenuFormat(_format).upper()+"\n")
 	print("1. Mi"+ MenuFormat(_format,False) +".\n2. Listas de reproducción.\n\n0. Atrás.\n")
@@ -50,10 +81,15 @@ def SecondMenu(_format):
 		ThirdMenu(_format)
 		SecondMenu(_format)
 	elif answer2 == "2":
-		FourthMenu(_format)
+		FifthMenu(_format)
 		SecondMenu(_format)
 
 def ThirdMenu(_format):
+
+	"""Esta función corresponde al tecer menú, en el cual el usuario puede
+	escoger entre ver de manera ordenada todas sus canciones fotos o videos,
+	buscar un elemento o añadir uno nuevo."""
+
 	print("\n===================0===================\n")
 	print("\tMI"+ MenuFormat(_format, False).upper()+"\n")
 	print("1. Ver mi"+ MenuFormat(_format, False) +".\n2. Buscar.\n3. Añadir.\n\n0. Atrás.\n")
@@ -71,11 +107,21 @@ def ThirdMenu(_format):
 		ThirdMenu(_format)
 
 def SearchMenu(_format):
+
+	"""Esta función corresponde al menú de busqueda, en el cual el usuario
+	introduce una información sobre un elemento, ya sea el nombre, el álbum, el
+	año, etc. y se imprimen las posibles opciones para dicha búsqueda. Desde
+	este menú es posible eliminar un elemento, modificar su información o
+	añadirlo a una lista de reproducción."""
+
 	print("\n===================0===================\n")
 	print("\tBUSCAR EN MI" + MenuFormat(_format,False).upper()+ "\n")
 	toSearch = input("¿Qué desea buscar? ")
-	Search(_format,toSearch)
-	print("\n¿Qué desea hacer con este elemento?\n1. Añadir a lista de reproducción.\n2. Eliminar.\n3. Modificar información.\n\n0. Atrás.")
+	searchResults = miscellaneous.SearchMainList(_format,toSearch)
+
+	#PARTE DE CODIGO FALTANTE: La función SearchMainList retorna una lista.
+
+	print("¿Qué desea hacer con este elemento?\n1. Añadir a lista de reproducción.\n2. Eliminar.\n3. Modificar información.\n\n0. Atrás.")
 	answer = Answer(["0","1","2","3"])
 	if answer == "0":
 		return
@@ -94,6 +140,11 @@ def SearchMenu(_format):
 
 
 def FourthMenu(_format):
+
+	"""Esta función corresponde al cuarto menú, el cual le da al usuario las
+	opciones de vizualizar sus canciones, fotos o videos según el orden que
+	escoja."""
+
 	print("\n===================0===================\n")
 	print("\tVER MI"+ MenuFormat(_format,False).upper() +"\n")
 	print(FourthMenuOptions(_format))
@@ -101,28 +152,39 @@ def FourthMenu(_format):
 	if answer4 == "0":
 		return
 	elif answer4 == "1":
-		SortMainList(_format,"name")
+		sortedList = miscellaneous.SortMainList(_format,"name")
 		FourthMenu(_format)
 	elif answer4 == "2":
-		SortMainList(_format,"author")
+		sortedList = miscellaneous.SortMainList(_format,"author")
 		FourthMenu(_format)
 	elif answer4 == "3":
-		SortMainList(_format,"album")
+		sortedList = miscellaneous.SortMainList(_format,"album")
 		FourthMenu(_format)
 	elif answer4 == "4":
-		SortMainList(_format,"year")
+		sortedList = miscellaneous.SortMainList(_format,"year")
 		FourthMenu(_format)
 	elif answer4 == "5":
-		SortMainList(_format,"type")
+		sortedList = miscellaneous.SortMainList(_format,"type")
 		FourthMenu(_format)
 
 def FourthMenuOptions(_format):
+
+	"""Esta función devuelve las opciones para el cuarto menú según el formato
+	que se esté usando."""
+
 	if _format == "music":
 		return "1. Por nombre.\n2. Por artista.\n3. Por álbum.\n4. Por año.\n5. Por género.\n\n0. Atrás.\n"
 	else:
 		return "1. Por nombre.\n2. Por protagonista.\n3. Por álbum.\n4. Por año.\n5. Por tipo.\n\n0. Atrás.\n"
 
 def MenuFormat(_format, onlyFormat = True):
+
+	"""Esta función devuelve strings que son utilizados en los menús para
+	completar los textos de los títulos o las opciones. De manera general,
+	devuelve una traducción del formato. El segundo argumento de esta función
+	hace que el string que se devuelve tenga los caracteres para completar
+	frases como "mi música" o "mis videos" (la letra s y un espacio)."""
+
 	if _format == "music":
 		if onlyFormat != True:
 			return " música"
@@ -135,28 +197,5 @@ def MenuFormat(_format, onlyFormat = True):
 		if onlyFormat != True:
 			return "s videos"
 		return "videos"
-
-def main():
-    programOn = True
-    while programOn == True:
-        MainMenu()
-        programOn = LogOut()
-
-def LogOut():
-     print("¿Desea salir de la aplicación? (SI \ NO)")
-     logOutConfirmation = input("su respuesta: ")
-     if logOutConfirmation.lower() == "si":
-        return False
-     elif logOutConfirmation.lower() == "no":
-        return True
-     else:
-        return LogOut()
-
-def Search(_format, userInput):
-	"""esta es la función de buscar elemento de Daniel"""
-	return
-
-def SortMainList(_format,key):
-	"""esta es la función de organizar lista de Daniel"""
 
 main()
