@@ -21,7 +21,7 @@ def SearchMainList(_format, name):
     #mainList = readFortmat(_format)
     return BinarySearch(mainList, name)
 
-def BinarySearch(_list, name):
+'''def BinarySearch(_list, name):
     first = 0
     last = len(_list)-1
     elementsFound = []
@@ -36,7 +36,23 @@ def BinarySearch(_list, name):
                 last = middle - 1
             else:
                 first = middle + 1
+    return elementsFound'''
+def BinarySearch(_list, item):
+    elementsFound = []
+    for key in _list[0].keys():
+        first = 0
+        last = len(_list)-1
+        while first <= last:
+            middle = (first + last) // 2
+            if _list[middle][key] == item:
+                elementsFound.append(_list[middle])
+                first = middle + 1
+            else:
+                if item < _list[middle][key]:
+                    last = middle - 1
+                else:
+                    first = middle + 1
     return elementsFound
 
 #print(SortMainList("music","type"))
-print(SearchMainList("music", "believer"))
+print(SearchMainList("music", "thriller"))
