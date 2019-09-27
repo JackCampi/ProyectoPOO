@@ -2,18 +2,21 @@
    referentes a la filtración de datos'''
 import prueba
 
-def SortList(_format, key):
-
+def SortMainList(_format, key):
     mainList = prueba.GetList()
     #mainList = readFortmat(_format)
+    return SortList(mainList, key)
+
+def SortList(_list, key):
+
     try:
-        return sorted(mainList, key = lambda _dict : _dict[key])
+        return sorted(_list, key = lambda _dict : _dict[key])
     except:
         raise NameError("Invalid key, please check if the key is correct")
 
 def Search(_format, name):
 
-    mainList = SortList("music","name")
+    mainList = SortMainList("music","name")
     #mainList = readFortmat(_format)
     item = BinarySearch(mainList, name)
     return item
@@ -34,5 +37,5 @@ def BinarySearch(_list, name):
                 first = middle + 1
     return found
 
-print(SortList("music","name"))
-print(Search("music", "demons3"))
+#print(SortMainList("music","name"))
+print(Search("music", "demons"))
