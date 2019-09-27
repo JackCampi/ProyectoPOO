@@ -1,4 +1,4 @@
-import miscellaneous
+import Miscellaneous
 
 def main():
 	"""Mantiene el programa abierto hasta que el usuario confirma que desea
@@ -117,7 +117,7 @@ def SearchMenu(_format):
 	print("\n===================0===================\n")
 	print("\tBUSCAR EN MI" + MenuFormat(_format,False).upper()+ "\n")
 	toSearch = input("¿Qué desea buscar? ")
-	searchResults = miscellaneous.SearchMainList(_format,toSearch)
+	searchResults = Miscellaneous.SearchMainList(_format,toSearch)
 
 	#PARTE DE CODIGO FALTANTE: La función SearchMainList retorna una lista.
 
@@ -152,19 +152,19 @@ def FourthMenu(_format):
 	if answer4 == "0":
 		return
 	elif answer4 == "1":
-		sortedList = miscellaneous.SortMainList(_format,"name")
+		sortedList = Miscellaneous.SortMainList(_format,"name")
 		FourthMenu(_format)
 	elif answer4 == "2":
-		sortedList = miscellaneous.SortMainList(_format,"author")
+		sortedList = Miscellaneous.SortMainList(_format,"author")
 		FourthMenu(_format)
 	elif answer4 == "3":
-		sortedList = miscellaneous.SortMainList(_format,"album")
+		sortedList = Miscellaneous.SortMainList(_format,"album")
 		FourthMenu(_format)
 	elif answer4 == "4":
-		sortedList = miscellaneous.SortMainList(_format,"year")
+		sortedList = Miscellaneous.SortMainList(_format,"year")
 		FourthMenu(_format)
 	elif answer4 == "5":
-		sortedList = miscellaneous.SortMainList(_format,"type")
+		sortedList = Miscellaneous.SortMainList(_format,"type")
 		FourthMenu(_format)
 
 def FourthMenuOptions(_format):
