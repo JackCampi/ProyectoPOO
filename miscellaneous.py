@@ -64,5 +64,5 @@ def CheckLeft(_list, index, item, key):
 '''for i in SortMainList("music", "type"):
     print(i)'''
 #print(SearchMainList("music", "pop"))
-for i in SearchMainList("music", "no 6 collaborations project"):
+for i in SearchMainList("music", "beat it"):
     print(i)
