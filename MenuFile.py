@@ -1,6 +1,6 @@
 def MainMenu():
 
-	""" hola we, Esta función corresponde al menú principal en el cual el usuario
+	"""Esta función corresponde al menú principal en el cual el usuario
 	tiene la opción de seleccionar el formato al que quiere acceder (Música,
 	Fotos o Videos). Este menú llama al segundo menú pasándole como argumento
 	lo que el usuario elija."""
