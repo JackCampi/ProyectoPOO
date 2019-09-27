@@ -1,10 +1,10 @@
 def MainMenu():
 
-	""" Esta función corresponde al menú principal en el cual el usuario
+	""" hola we, Esta función corresponde al menú principal en el cual el usuario
 	tiene la opción de seleccionar el formato al que quiere acceder (Música,
 	Fotos o Videos). Este menú llama al segundo menú pasándole como argumento
 	lo que el usuario elija."""
-	
+
 	print("\n===================0===================\n")
 	print("\tMENÚ PRINCIPAL\n\n1. Música.\n2. Fotos.\n3. Videos.\n\n0. Salir.\n")
 	answer1 = Answer(["0","1","2","3"])
@@ -22,13 +22,13 @@ def MainMenu():
 
 def Answer(options):
 
-	"""Esta función pide la entrada del usuario y la evalúa de manera que 
+	"""Esta función pide la entrada del usuario y la evalúa de manera que
 	esta corresponda a las opciones disponibles en cada menú. Recibe como
 	parámetro una lista de las opciones que el usuario tiene disponibles y
 	a partir de esta compara si la entrada corresponde a alguna de ellas, de
 	lo contrario, la función se encarga de pedirle al usuario una respuesta
 	válida. Retorna la opción final del usuario como un string."""
-	
+
 	validAnswer = False
 	answer = "x"
 	while validAnswer == False:
