@@ -1,10 +1,10 @@
 '''Este es el módulo moselaneo donde se encuentran diversas funciones
    referentes a la filtración de datos'''
-import prueba
+import MainListTest
 
 def SortMainList(_format, key):
 
-    mainList = prueba.GetList()
+    mainList = MainListTest.GetList()
     #mainList = readFortmat(_format)
     return SortList(mainList, key)
 
@@ -64,5 +64,5 @@ def CheckLeft(_list, index, item, key):
 '''for i in SortMainList("music", "type"):
     print(i)'''
 #print(SearchMainList("music", "pop"))
-for i in SearchMainList("music", "beat it"):
+for i in SearchMainList("music", "pop"):
     print(i)

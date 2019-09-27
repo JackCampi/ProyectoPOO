@@ -1,4 +1,4 @@
-''' esto es una main list de caonciones para realizar pruebas'''
+''' esto es una mainList de canciones para realizar pruebas'''
 
 
 mainList=[
