@@ -1,4 +1,5 @@
 import Miscellaneous
+import files
 
 def main():
 	"""Mantiene el programa abierto hasta que el usuario confirma que desea
@@ -85,6 +86,7 @@ def SecondMenu(_format):
 		SecondMenu(_format)
 
 def ThirdMenu(_format):
+	#FALTA CÓDIGO
 
 	"""Esta función corresponde al tecer menú, en el cual el usuario puede
 	escoger entre ver de manera ordenada todas sus canciones fotos o videos,
@@ -107,6 +109,7 @@ def ThirdMenu(_format):
 		ThirdMenu(_format)
 
 def SearchMenu(_format):
+	#FALTA CÓDIGO
 
 	"""Esta función corresponde al menú de busqueda, en el cual el usuario
 	introduce una información sobre un elemento, ya sea el nombre, el álbum, el
