@@ -1,5 +1,5 @@
-'''Módulo files, maneja todo lo relacionado con los archivos y a representación
-    interna de los elementos'''
+'''Módulo files, maneja todo lo relacionado con los archivos y a
+    representación interna de los elementos'''
 import os
 
 
@@ -10,12 +10,12 @@ def MakeEntry(string):
     parámetros de entrada:
     string -- La cadena que contiene la información de la nueva entrada,
               tiene que estar en el siguiente orden "nombre, autor, album,
-              año, género, directorio."
+              año, género."
 
     salida:
     Un diccionario que contiene la información ingresada.
     """
-    order = ("name", "author", "album", "year", "genre", "path")
+    order = ("name", "author", "album", "year", "genre")
     elements = string.strip("\n").split("¬")
     entry = {}
     for i in range(len(order)):
@@ -35,8 +35,7 @@ def ToString(entry):
 
     salida:
     Una lista separada por el caracter ¬, que contiene la información de una
-    entrada en el siguiente orden "nombre, autor, album, año, género,
-    directorio."
+    entrada en el siguiente orden "nombre, autor, album, año, género."
     """
     ans = ""
     for i in entry:
@@ -64,14 +63,28 @@ def ReadFormat(_format, name="Main_list.txt"):
     path = root + os.sep + name
     fileHandler = open(path, "r")
     bigList = []
-    try:
-        for line in fileHandler:
-            entry = MakeEntry(line)
-            bigList.append(entry)
+    for line in fileHandler:
+        entry = MakeEntry(line)
+        bigList.append(entry)
+    fileHandler.close()
+    return bigList
 
-    finally:
-        fileHandler.close()
-        return bigList
+
+def WriteList(_list, _format, name="Main_list.txt"):
+    """
+    Recibe una lista de diccionarios, el formato, y el nombre de archivo de una lista.
+    No devuelve nada, solo sobreescribe la información de la lista de diccionarios en el archivo.
+    :param _list:
+    :param _format:
+    :param name:
+    :return:
+    """
+    root = _format
+    path = root + os.sep + name
+    fileHandler = open(path, "w")
+    for i in _list:
+        fileHandler.write(ToString(i) + "\n")
+    fileHandler.close()
 
 
 def GetOrderedValue(entry):
@@ -135,10 +148,10 @@ def AddEntry(newEntry, _format, name="Main_list.txt"):
     No hay salida, solo modifica el archivo.
     """
     entries = ReadFormat(_format)
+    n = GetNewPosition(newEntry, entries)
     root = _format
     path = root + os.sep + name
     fileHandler = open(path, "w")
-    n = GetNewPosition(newEntry, entries)
     if n == 0:
         fileHandler.write(ToString(newEntry) + "\n")
         for i in entries:
@@ -180,3 +193,25 @@ def DeleteEntry(entry, _format, name="Main_list.txt"):
         if i != entry:
             fileHandler.write(ToString(i) + "\n")
     fileHandler.close()
+
+
+def ModifyList(newEntry, oldEntry, _format, name="Main_list.txt"):
+    """Recibe un nuevo diccionario, un viejo diccionario, el formato, y el nombre de archivo de una lista.
+    No devuelve nada, pero sobreescribe la información de la nueva entrada en la vieja entrada.
+
+    parámetros de entrada:
+    newEntry: Nueva entrada.
+    oldEntry: Vieja entrada.
+    _format -- El formato de la lista, puede ser "music", "pictures", o
+    "videos."
+    name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
+    si se desea cambiar la lista predetermina debe escribir
+    "playlists\nombre.txt."
+
+    salida:
+    No hay salida.
+    """
+    entries = ReadFormat(_format, name)
+    index = entries.index(oldEntry)
+    entries[index] = newEntry
+    WriteList(entries, _format, name)
