@@ -15,7 +15,7 @@ def MakeEntry(string):
     salida:
     Un diccionario que contiene la información ingresada.
     """
-    order = ("name", "author", "album", "year", "genre")
+    order = ("name", "author", "album", "year", "type")
     elements = string.strip("\n").split("¬")
     entry = {}
     for i in range(len(order)):
