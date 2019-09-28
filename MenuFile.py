@@ -118,9 +118,22 @@ def SearchMenu(_format):
 	print("\tBUSCAR EN MI" + MenuFormat(_format,False).upper()+ "\n")
 	toSearch = input("¿Qué desea buscar? ")
 	searchResults = Miscellaneous.SearchMainList(_format,toSearch)
-
-	#PARTE DE CODIGO FALTANTE: La función SearchMainList retorna una lista.
-
+	if len(searchResults) == 0 :
+		answer = NotFoundMenu(_format)
+		if answer == "0":
+			return
+		else:
+			SearchMenu(_format)
+			return
+	elif len(searchResults) == 1:
+		printList(_format, searchResults)
+		searchElement = searchResults[0]
+	else:
+		PrintList(_format,searchResults)
+		searchElement = searchResult[SelectListElement(len(searchResult))]
+		print("\n===================0===================\n")
+		PrintListHead(_format)
+		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(searchElement["name"],searchElement["author"],searchElement["album"],searchElement["year"],searchElement["type"]))
 	print("¿Qué desea hacer con este elemento?\n1. Añadir a lista de reproducción.\n2. Eliminar.\n3. Modificar información.\n\n0. Atrás.")
 	answer = Answer(["0","1","2","3"])
 	if answer == "0":
@@ -138,6 +151,18 @@ def SearchMenu(_format):
 		print()
 		return
 
+def NotFoundMenu(_format):
+	print("No se encontró ningún elemento en mi" + MenuFormat(_format,False) +".\n")
+	print("1. Volver a buscar.\n\n0. Atrás.\n")
+	answer = Answer(["0","1"])
+	return answer
+
+def SelectListElement(listLength):
+	print("¿Qué elemento desea usar? ")
+	selectElement = Answer(list(range(1,listLength+1)))
+	return selectElement - 1
+
+
 
 def FourthMenu(_format):
 
@@ -153,18 +178,23 @@ def FourthMenu(_format):
 		return
 	elif answer4 == "1":
 		sortedList = Miscellaneous.SortMainList(_format,"name")
+		PrintList(_format,sortedList)
 		FourthMenu(_format)
 	elif answer4 == "2":
 		sortedList = Miscellaneous.SortMainList(_format,"author")
+		PrintList(_format,sortedList)
 		FourthMenu(_format)
 	elif answer4 == "3":
 		sortedList = Miscellaneous.SortMainList(_format,"album")
+		PrintList(_format,sortedList)
 		FourthMenu(_format)
 	elif answer4 == "4":
 		sortedList = Miscellaneous.SortMainList(_format,"year")
+		PrintList(_format,sortedList)
 		FourthMenu(_format)
 	elif answer4 == "5":
 		sortedList = Miscellaneous.SortMainList(_format,"type")
+		PrintList(_format,sortedList)
 		FourthMenu(_format)
 
 def FourthMenuOptions(_format):
@@ -197,5 +227,29 @@ def MenuFormat(_format, onlyFormat = True):
 		if onlyFormat != True:
 			return "s videos"
 		return "videos"
+
+def PrintList(_format,_list):
+	"""Esta función se encarga de imprimir las listas con la cabecera de manera
+	ordenada"""
+	PrintListHead(_format)
+	for dicIndex in range(len(_list)):
+		PrintListElement(_list , dicIndex)
+
+def PrintListElement(_list,dicIndex = 0):
+
+	"""Imprime la información de una canción/foto/video de manera ordenada. Al
+	principio añade un índice que se utiliza para enumerar los elementos en el
+	caso de que estos sean varios."""
+
+	toPrint = "{0}.\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\t|\t{5}\n"
+	print(toPrint.format(dicIndex+1,_list[dicIndex]["name"],_list[dicIndex]["author"],_list[dicIndex]["album"],_list[dicIndex]["year"],_list[dicIndex]["type"]))
+
+def PrintListHead(_format):
+	"""Imprime la cabecera de la lista cuando se muestran los elementos."""
+	if _format == "music":
+		print("No.\t|\tNombre\t|\tArtista\t|\tÁlbum\t|\tAño\t|\tGénero\n")
+	else:
+		print("No.\t|\tNombre\t|\tProtagonista\t|\tÁlbum\t|\tAño\t|\tTipo\n")
+	return
 
 main()
