@@ -1,5 +1,5 @@
-'''Módulo files, maneja todo lo relacionado con los archivos y a
-    representación interna de los elementos'''
+"""Módulo files, maneja todo lo relacionado con los archivos y a
+    representación interna de los elementos"""
 import os
 
 
@@ -18,6 +18,7 @@ def MakeEntry(string):
     order = ("name", "author", "album", "year", "type")
     elements = string.strip("\n").split("¬")
     entry = {}
+    assert len(elements) == len(order), "Entrada inválida"
     for i in range(len(order)):
         if order[i] == "year":
             entry[order[i]] = int(elements[i])
@@ -73,11 +74,11 @@ def ReadFormat(_format, name="Main_list.txt"):
 def WriteList(_list, _format, name="Main_list.txt"):
     """
     Recibe una lista de diccionarios, el formato, y el nombre de archivo de una lista.
-    No devuelve nada, solo sobreescribe la información de la lista de diccionarios en el archivo.
-    :param _list:
-    :param _format:
-    :param name:
-    :return:
+    No devuelve nada, solo sobrescribe la información de la lista de diccionarios en el archivo.
+    :param _list: lista de diccionarios.
+    :param _format: Tipo de archivo
+    :param name: Nombre de archivo.
+    :return: None
     """
     root = _format
     path = root + os.sep + name
@@ -147,27 +148,10 @@ def AddEntry(newEntry, _format, name="Main_list.txt"):
     salida:
     No hay salida, solo modifica el archivo.
     """
-    entries = ReadFormat(_format)
+    entries = ReadFormat(_format, name)
     n = GetNewPosition(newEntry, entries)
-    root = _format
-    path = root + os.sep + name
-    fileHandler = open(path, "w")
-    if n == 0:
-        fileHandler.write(ToString(newEntry) + "\n")
-        for i in entries:
-            fileHandler.write(ToString(i) + "\n")
-    elif n >= len(entries):
-        for i in entries:
-            fileHandler.write(ToString(i) + "\n")
-        fileHandler.write(ToString(newEntry) + "\n")
-    else:
-        for i in range(0, n):
-            fileHandler.write(ToString(entries[i]) + "\n")
-        fileHandler.write(ToString(newEntry) + "\n")
-        for i in range(n, len(entries)):
-            fileHandler.write(ToString(entries[i]) + "\n")
-
-    fileHandler.close()
+    entries.insert(n, newEntry)
+    WriteList(entries, _format, name)
 
 
 def DeleteEntry(entry, _format, name="Main_list.txt"):
@@ -197,13 +181,12 @@ def DeleteEntry(entry, _format, name="Main_list.txt"):
 
 def ModifyList(newEntry, oldEntry, _format, name="Main_list.txt"):
     """Recibe un nuevo diccionario, un viejo diccionario, el formato, y el nombre de archivo de una lista.
-    No devuelve nada, pero sobreescribe la información de la nueva entrada en la vieja entrada.
+    No devuelve nada, pero sobrescribe la información de la nueva entrada en la vieja entrada.
 
     parámetros de entrada:
     newEntry: Nueva entrada.
     oldEntry: Vieja entrada.
-    _format -- El formato de la lista, puede ser "music", "pictures", o
-    "videos."
+    _format -- El formato de la lista, puede ser "music", "pictures", o "videos."
     name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
     si se desea cambiar la lista predetermina debe escribir
     "playlists\nombre.txt."
@@ -211,7 +194,59 @@ def ModifyList(newEntry, oldEntry, _format, name="Main_list.txt"):
     salida:
     No hay salida.
     """
-    entries = ReadFormat(_format, name)
-    index = entries.index(oldEntry)
-    entries[index] = newEntry
-    WriteList(entries, _format, name)
+    DeleteEntry(oldEntry, _format, name)
+    AddEntry(newEntry, _format, name)
+
+
+def MakePlaylist(_format, name):
+    """
+    Recibe el formato y el nombre de una lista de reproducción, para crear su archivo asociado.
+    :param _format: Formato de la lista
+    :param name: Nombre del archivo, sin el txt
+    :return: None
+    """
+    path = _format + os.sep + "playlists" + os.sep + name + ".txt"
+    fileHandler = open(path, "w")
+    fileHandler.close()
+
+
+def DeletePlaylist(_format, name):
+    """
+    Recibe el formato y el nombre de una lista de reproducción, y elimina su archivo asociado.
+
+    :param _format: Formato de la lista
+    :param name: Nombre del archivo, sin el txt
+    :return: None
+    """
+    path = _format + os.sep + "playlists" + os.sep + name + ".txt"
+    os.remove(path)
+
+#### Tests
+import MainListTest
+
+music = MainListTest.GetList()
+
+for i in music:
+    AddEntry(i, "music")
+
+new_song = MakeEntry("all you need is love¬the beatles¬magical mystery tour¬1967¬rock")
+old_song = {"name":"waiting for love","author":"avicii","album":"stories","year":2015,"type":"electronica"}
+to_delete = {"name":"ajena","author":"eddy herrera","album":"atrevido","year":2001,"type":"merengue"}
+ModifyList(new_song, old_song, "music")
+DeleteEntry(to_delete, "music")
+
+
+MakePlaylist("pictures", "musica_en_fotosxd")
+for i in music:
+    AddEntry(i, "pictures", "playlists\musica_en_fotosxd.txt")
+
+
+for i in ReadFormat("music"):
+    print(GetOrderedValue(i))
+
+print("------------------------")
+for i in ReadFormat("music"):
+    print(GetNewPosition(i, ReadFormat("music")))
+
+
+DeletePlaylist("pictures", "musica_en_fotosxd")
