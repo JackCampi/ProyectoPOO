@@ -14,4 +14,5 @@ mainList=[
         ]
 
 def GetList():
+    #funcion para llamar a esta mainList desde otros modulos
     return mainList
