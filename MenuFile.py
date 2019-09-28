@@ -1,3 +1,7 @@
+"""En este módulo se encuentran los menús que se imprimen en la consola. Toma
+funciones de Miscellaneous.py y files.py, los cuales corresponden al manejo de
+los archivos y la información."""
+
 import Miscellaneous
 import files
 
@@ -108,6 +112,13 @@ def ThirdMenu(_format):
 		ThirdMenu(_format)
 
 def AddElementMenu(_format):
+	"""Esta función corresponde al menú donde se toman los datos correspondientes
+	sobre cada elemento. A partir de dicha información, se crea un diccionario
+	que posteriormente es añadido al archivo de texto del formato.
+
+	Este menú no devuelve ningún valor. al añadir el elemento, vuelve al tercer
+	menú."""
+
 	print("\n===================0===================\n")
 	print("\tAÑADIR A MI"+MenuFormat(_format, False).upper()+"\n")
 	newElementDic = {"name": "" ,"author" : "" , "album" : "" , "year" : "", "type" : "" , "path" : ""}
@@ -117,7 +128,8 @@ def AddElementMenu(_format):
 	newElementDic["year"] = input("Año: ")
 	newElementDic["type"] = input("Género: ")
 	newElementDic["path"] = input("Archivo: ")
-	AddEntry(newElementDic,_format)
+	files.AddEntry(newElementDic,_format)
+	print("\nEl elemento se ha añadido a \"mi{0}\".".format(MenuFormat(_format, False)))
 
 def SearchMenu(_format):
 	#FALTA CÓDIGO
@@ -218,6 +230,34 @@ def FourthMenuOptions(_format):
 		return "1. Por nombre.\n2. Por artista.\n3. Por álbum.\n4. Por año.\n5. Por género.\n\n0. Atrás.\n"
 	else:
 		return "1. Por nombre.\n2. Por protagonista.\n3. Por álbum.\n4. Por año.\n5. Por tipo.\n\n0. Atrás.\n"
+
+def FifthMenu(_format):
+	print("\n===================0===================\n")
+	print("\tLISTAS DE REPRODUCCIÓN DE " + MenuFormat(_format).upper() + "\n")
+	print("1. Mis listas.\n2.Crear lista.\n3. Buscar lista.\n4. Eliminar lista.\n\n0. Salir.\n")
+	answer = Answer(["0","1","2","3","4"])
+	if answer == "0":
+		return
+	elif answer == "1":
+		#función de mostrar listas.
+		#menú de mis listas (sexto menú).
+		FifthMenu(_format)
+	elif answer == "2":
+		NewPlaylistMenu(_format)
+		#función de crear una lista.
+		FifthMenu(_format)
+	elif answer == "3":
+		#función de buscar una lista.
+		FifthMenu(_format)
+	elif answer == "4":
+		#función de eliminar una lista.
+		FifthMenu(_format)
+
+def NewPlaylistMenu(_format):
+	print("\n===================0===================\n")
+	print("\tCREAR LISTA DE REPRODUCCIÓN\n")
+	playlistName = input("Nombre de la lista de reproducción: ")
+
 
 def MenuFormat(_format, onlyFormat = True):
 
