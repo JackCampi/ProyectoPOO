@@ -108,6 +108,18 @@ def ThirdMenu(_format):
 		#Función de añadir de Juan
 		ThirdMenu(_format)
 
+def AddElementMenu(_format):
+	#FALTA CÓDIGO
+	print("\n===================0===================\n")
+	print("\tAÑADIR A MI"+MenuFormat(_format, False).upper()+"\n")
+	newElementDic = {"name": "" ,"author" : "" , "album" : "" , "year" : "", "type" : "" , "path" : ""}
+	newElementDic["name"] = input("Nombre: ")
+	newElementDic["author"] = input("Autor: ")
+	newElementDic["album"] = input("Álbum: ")
+	newElementDic["year"] = input("Año: ")
+	newElementDic["type"] = input("Género: ")
+	newElementDic["path"] = input("Archivo: ")
+
 def SearchMenu(_format):
 	#FALTA CÓDIGO
 
