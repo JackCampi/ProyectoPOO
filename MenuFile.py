@@ -86,7 +86,6 @@ def SecondMenu(_format):
 		SecondMenu(_format)
 
 def ThirdMenu(_format):
-	#FALTA CÓDIGO
 
 	"""Esta función corresponde al tecer menú, en el cual el usuario puede
 	escoger entre ver de manera ordenada todas sus canciones fotos o videos,
@@ -105,11 +104,10 @@ def ThirdMenu(_format):
 		SearchMenu(_format)
 		ThirdMenu(_format)
 	elif answer3 == "3":
-		#Función de añadir de Juan
+		AddElementMenu(_format)
 		ThirdMenu(_format)
 
 def AddElementMenu(_format):
-	#FALTA CÓDIGO
 	print("\n===================0===================\n")
 	print("\tAÑADIR A MI"+MenuFormat(_format, False).upper()+"\n")
 	newElementDic = {"name": "" ,"author" : "" , "album" : "" , "year" : "", "type" : "" , "path" : ""}
@@ -119,11 +117,12 @@ def AddElementMenu(_format):
 	newElementDic["year"] = input("Año: ")
 	newElementDic["type"] = input("Género: ")
 	newElementDic["path"] = input("Archivo: ")
+	AddEntry(newElementDic,_format)
 
 def SearchMenu(_format):
 	#FALTA CÓDIGO
 
-	"""Esta función corresponde al menú de busqueda, en el cual el usuario
+	"""Esta función corresponde al menú de búsqueda, en el cual el usuario
 	introduce una información sobre un elemento, ya sea el nombre, el álbum, el
 	año, etc. y se imprimen las posibles opciones para dicha búsqueda. Desde
 	este menú es posible eliminar un elemento, modificar su información o
@@ -158,8 +157,8 @@ def SearchMenu(_format):
 		print()
 		return
 	elif answer == "2":
-		#función de eliminar de Juan
-		print()
+		files.DeleteEntry(searchElement, _format)
+		print("Se ha eliminado el elemento. Volviendo a \"MI" + MenuFormat(_format,False).upper()+"\".")
 		return
 	elif answer == "3":
 		#Menú de modificación
@@ -176,8 +175,6 @@ def SelectListElement(listLength):
 	print("¿Qué elemento desea usar? ")
 	selectElement = Answer(list(range(1,listLength+1)))
 	return selectElement - 1
-
-
 
 def FourthMenu(_format):
 
