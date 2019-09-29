@@ -229,7 +229,12 @@ def GetPlaylists(_format):
     :type _format: str
     """
     path = _format + os.sep + "playlists"
-    return list(os.walk(path))[-1][-1]
+    ans = []
+    for root, directory, files in os.walk(path):
+        for file in files:
+            if file.endswith(".txt"):
+                ans.append(file)
+    return ans
 
 
 #### Tests
