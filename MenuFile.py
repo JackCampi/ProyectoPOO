@@ -290,8 +290,8 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"): #Modificando..
 			print("No hay elementos en "+listName+".")
 		else:
 			PrintList(_format,sortedList)
-	SortListMenu(_format) #FUNCION MODIFICADA, ERA EL CUARTO MENÚ. Hay que cambiarla para que sirva para cualquier lista.
-
+	SortListMenu(_format)
+	
 def FourthMenu(_format):
 	#FALTA CODIGO
 	print("\n===================0===================\n")
