@@ -256,26 +256,41 @@ def SortListMenu(_format):
 		return
 	elif answer4 == "1":
 		sortedList = Miscellaneous.SortMainList(_format,"name")
-		PrintList(_format,sortedList)
+		if len(sortedList) == 0:
+			print("No hay elementos en mi" + MenuFormat(_format,False)+".")
+		else:
+			PrintList(_format,sortedList)
 	elif answer4 == "2":
 		sortedList = Miscellaneous.SortMainList(_format,"author")
-		PrintList(_format,sortedList)
+		if len(sortedList) == 0:
+			print("No hay elementos en mi" + MenuFormat(_format,False)+".")
+		else:
+			PrintList(_format,sortedList)
 	elif answer4 == "3":
 		sortedList = Miscellaneous.SortMainList(_format,"album")
-		PrintList(_format,sortedList)
+		if len(sortedList) == 0:
+			print("No hay elementos en mi" + MenuFormat(_format,False)+".")
+		else:
+			PrintList(_format,sortedList)
 	elif answer4 == "4":
 		sortedList = Miscellaneous.SortMainList(_format,"year")
-		PrintList(_format,sortedList)
+		if len(sortedList) == 0:
+			print("No hay elementos en mi" + MenuFormat(_format,False)+".")
+		else:
+			PrintList(_format,sortedList)
 	elif answer4 == "5":
 		sortedList = Miscellaneous.SortMainList(_format,"type")
-		PrintList(_format,sortedList)
+		if len(sortedList) == 0:
+			print("No hay elementos en mi" + MenuFormat(_format,False)+".")
+		else:
+			PrintList(_format,sortedList)
 	SortListMenu(_format) #FUNCION MODIFICADA, ERA EL CUARTO MENÚ. Hay que cambiarla para que sirva para cualquier lista.
 
 def FourthMenu(_format):
 	#FALTA CODIGO
 	print("\n===================0===================\n")
 	print("\tLISTAS DE REPRODUCCIÓN DE " + MenuFormat(_format).upper() + "\n")
-	print("1. Mis listas.\n2.Crear lista.\n3. Buscar lista.\n4. Eliminar lista.\n\n0. Salir.\n")
+	print("1. Mis listas.\n2. Crear lista.\n3. Buscar lista.\n4. Eliminar lista.\n\n0. Salir.\n")
 	answer = Answer(["0","1","2","3","4"])
 	if answer == "0":
 		return
@@ -374,8 +389,8 @@ def SelectListElement(listLength):
 	elemento que el usuario escoga."""
 
 	print("¿Qué elemento desea usar? ")
-	selectElement = Answer(list(range(1,listLength+1)))
-	return selectElement - 1
+	selectElement = Answer([str(x) for x in range(1,listLength+1)])
+	return int(selectElement) - 1
 
 def SortListMenuOptions(_format):
 
