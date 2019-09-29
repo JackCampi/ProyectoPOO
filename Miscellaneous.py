@@ -1,7 +1,7 @@
 '''Este es el módulo miselaneo donde se encuentran diversas funciones
    referentes a la filtración de datos'''
 
-import MainListTest #importación de la Main_list para hacer pruebas
+#import MainListTest #importación de la Main_list para hacer pruebas
                     #se modificará cuando se tengan los archivos de texto
 import files # importación del módulo de Juan
 
@@ -13,8 +13,8 @@ def SortMainList(_format, key):
        RETURN: lista de diccionarios de toda la Main_list ordenados
        por la clave.'''
 
-    mainList = MainListTest.GetList() # llamada a la Main_list de prueba
-    #mainList = files.ReadFormat(_format) # fución creada por Juan
+    #mainList = MainListTest.GetList() # llamada a la Main_list de prueba
+    mainList = files.ReadFormat(_format) # fución creada por Juan
     return SortList(mainList, key)
 
 def SortList(_list, key):
@@ -38,9 +38,24 @@ def SearchMainList(_format, item):
        RETURN: lista de diccionarios que coincidan con la busqueda
        NOTA: busca tanto en nombre como en álbum, autor, año, etc...'''
 
-    mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
-    #mainList = files.ReadFormat(_format) # fución creada por Juan
+    #mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
+    mainList = files.ReadFormat(_format) # fución creada por Juan
     return BinarySearch(mainList, item)
+
+def BinarySearchInList(_list, item):
+    _list.sort()
+    first = 0
+    last = len(_list)-1
+    found = False
+    while first <= last and not found:
+        middle = (first + last) // 2
+        if _list[middle] == item:
+            return
+        else:
+            if item < _list[middle]:
+                last = middle - 1
+            else:
+                first = middle + 1
 
 def BinarySearch(_list, item):
 
@@ -110,7 +125,7 @@ def CheckLeft(_list, index, item, key):
     aquí se realizan pruebas para ver si todo funciona correctamente,
     se borrará cuando todo este listo'''
 
-#print(SortMainList("music","type"))
+#print(SortMainList("music","name"))
 '''for i in SortMainList("music", "type"):
     print(i)'''
 #print(SearchMainList("music", "pop"))
