@@ -138,7 +138,7 @@ def AddEntry(newEntry, _format, name="Main_list.txt"):
     añade la nueva entrada a la lista.
 
     parámetros de entrada:
-    newEntry -- Entrada que será agregada.
+    newEntry -- Entrada que será agregada (dict).
     _format -- El formato de la lista, puede ser "music", "pictures", o
     "videos."
     name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
@@ -159,7 +159,7 @@ def DeleteEntry(entry, _format, name="Main_list.txt"):
     elimina la entrada a la lista.
 
     parámetros de entrada:
-    newEntry -- Entrada que será agregada.
+    entry -- Entrada que será agregada (dict).
     _format -- El formato de la lista, puede ser "music", "pictures", o
     "videos."
     name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
@@ -184,8 +184,8 @@ def ModifyList(newEntry, oldEntry, _format, name="Main_list.txt"):
     No devuelve nada, pero sobrescribe la información de la nueva entrada en la vieja entrada.
 
     parámetros de entrada:
-    newEntry: Nueva entrada.
-    oldEntry: Vieja entrada.
+    newEntry: Nueva entrada (dict).
+    oldEntry: Vieja entrada (dict).
     _format -- El formato de la lista, puede ser "music", "pictures", o "videos."
     name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
     si se desea cambiar la lista predetermina debe escribir
