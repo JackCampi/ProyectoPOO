@@ -15,7 +15,7 @@ def MakeEntry(string):
     salida:
     Un diccionario que contiene la información ingresada.
     """
-    order = ("name", "author", "album", "year", "type")
+    order = ("name", "author", "album", "year", "type", "path")
     elements = string.strip("\n").split("¬")
     entry = {}
     assert len(elements) == len(order), "Entrada inválida"
@@ -233,14 +233,15 @@ def GetPlaylists(_format):
     for root, directory, files in os.walk(path):
         for file in files:
             if file.endswith(".txt"):
-                ans.append(file)
+                ans.append(file[:-4])
     return ans
 
 
 #### Tests
 
 
-print(GetPlaylists("pictures"))
+print(GetPlaylists("music"))
+
 """
 import MainListTest
 
