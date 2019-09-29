@@ -42,6 +42,21 @@ def SearchMainList(_format, item):
     mainList = files.ReadFormat(_format) # fución creada por Juan
     return BinarySearch(mainList, item)
 
+def BinarySearchInList(_list, item):
+    _list.sort()
+    first = 0
+    last = len(_list)-1
+    found = False
+    while first <= last and not found:
+        middle = (first + last) // 2
+        if _list[middle] == item:
+            return
+        else:
+            if item < _list[middle]:
+                last = middle - 1
+            else:
+                first = middle + 1
+
 def BinarySearch(_list, item):
 
     '''fución que recibe una lista y un item para buscar en dicha lista
@@ -110,7 +125,7 @@ def CheckLeft(_list, index, item, key):
     aquí se realizan pruebas para ver si todo funciona correctamente,
     se borrará cuando todo este listo'''
 
-#print(SortMainList("music","type"))
+#print(SortMainList("music","name"))
 '''for i in SortMainList("music", "type"):
     print(i)'''
 #print(SearchMainList("music", "pop"))
