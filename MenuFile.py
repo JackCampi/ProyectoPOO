@@ -151,18 +151,23 @@ def SearchMenu(_format):
 			return
 	elif len(searchResults) == 1:
 		searchElement = searchResults[0]
+		FoundElementMenu(_format, searchElement)
+		return
 	else:
 		PrintList(_format,searchResults)
 		searchElement = searchResults[SelectListElement(len(searchResults))]
-	FoundElementMenu(_format, searchElement)
+		FoundElementMenu(_format, searchElement)
+		return
 
 def FoundElementMenu(_format, foundElement):
-
 
 	"""Esta función corresponde al menú que el usuario dispone cuando encuentra
 	un elemento. Desde este menú puede añadir dicho elemento a una lista de
 	reproducción, eliminarlo o modificar su información.
-	- La primera opción .......
+	- Recibe como argumentos el formato sobre el que se está trabajando y el
+	DICCIONARIO del elemento que se encontró en el SearchMenu.
+	- La primera opción lleva a lusuario a un menú donde seleccionará la lista
+	a la que quiere añadir el elemento encontrado.
 	- La segunda opción elimina el elemento mediante la función DeleteEntry de
 	la librería files.
 	- La tercera opción lleva al menú de modificación, donde se ingresa la nueva
@@ -188,6 +193,16 @@ def FoundElementMenu(_format, foundElement):
 		return
 
 def AddToPlaylistMenu(_format, toAddElement):
+
+	"""Esta función corresponde al menú donde el usuario selecciona la lista de
+	reproducción a la que quiera añadir el elemento encontrado.
+	- Como argumento recibe el formato sobre el que se está trabajando y el
+	DICCIONARIO del elmento encontrado en el menú anterior.
+	- El programa avisa cuando no hay listas de reproducción.
+	- Esta función llama a AddEntry de la librería files para añadir el elemento
+	a la lista.
+	- Al terminar, el programa se devuelve al tecer menú."""
+
 	playlistList = files.GetPlaylists(_format)
 	if len(playlistList) == 0:
 		print("No se encontraron listas de reproducción en "+ MenuFormat(_format)+".")
@@ -198,12 +213,15 @@ def AddToPlaylistMenu(_format, toAddElement):
 		playlistName = playlistList[SelectListElement(len(playlistList))]
 		playlistPath = "playlist"+ os.sep + playlistName + ".txt"
 		files.AddEntry(toAddElement ,_format , playlistPath)
-		print("Se añadió \""+toAddElement["name"]+ "\" a " + playlistName + ".")	
+		print("Se añadió \""+toAddElement["name"]+ "\" a " + playlistName + ".")
+		return
 
 def ModifyElementMenu(_format, oldElementDic):
 
 	"""Esta función corresponde al menú donde el usuario ingresa la nueva
 	información de un elemento para modificarlo.
+	-Recibe como argumentos el formato sobre el que se está trabajando y el
+	DICCIONARIO del elemento que se desea modificar.
 	- Llama a TakeElementInfo para tomar la nueva información, y a ModifyList
 	de la librería files para reemplazar el archivo principal.
 	- Al terminar, vuelve al tercer menú."""
@@ -230,14 +248,17 @@ def NotFoundMenu(_format, listName ):
 
 def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 
-	"""CORREGIR... Esta función corresponde al menú de listas ordenadas, el cual le da al
+	"""Esta función corresponde al menú de listas ordenadas, el cual le da al
 	usuario las opciones de vizualizar la lista según el orden que
 	escoja.
-	- Recibe como argumento el formato sobre el cual se está trabajando.
+	- Sirve para cualquier lista, ya sea la principal o una lista de reproducción.
+	- Recibe como argumento el formato sobre el cual se está trabajando, el
+	nombre de la lista y la ruta de la lista (Como predeterminada está la lista
+	de elementos principal "Main_list.txt").
 	- Desde la primera opción a la quinta imprime una lista de elementos
 	ordenados según la característica seleccionada por el usuario.
 	- Al imprimir las listas se llama a sí misma hasta que el usuario desea salir.
-	- Al salir, vuelve al tercer menú."""
+	- Al salir (cuando el usuario responde "0"), vuelve al menú anterior."""
 
 	print("\n===================0===================\n")
 	print("\tVER "+ listName.upper() +"\n")
@@ -283,6 +304,20 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 	SortListMenu(_format)
 
 def FourthMenu(_format):
+
+	"""Esta función corresponde al CUARTO menú, en el cual se encuentran las
+	diferentes opciones para las listas de reproducción.
+	- Como argumento sólo recibe el formato sobre el cual se está trabajando.
+	- La primera opción muestra las playlist creadas y le pregunta al usuario si
+	desea seleccionar alguna. En el caso de seleccionar alguna, se llama una
+	función que despliega un menú para una lista en específico. Del caso contrario,
+	la función se llama a sí misma.
+	- La segunda opción llama al menú donde se crean nuevas listas de reproducción.
+	- La tecrcera opción permite buscar listas de reproducción.
+	- La cuarta opción elimina alguna playlist.
+	- Cuando las funciones terminan, la función se llama a sí misma hasta que el
+	usuario introduce la opción '0'."""
+
 	print("\n===================0===================\n")
 	print("\tLISTAS DE REPRODUCCIÓN DE " + MenuFormat(_format).upper() + "\n")
 	print("1. Mis listas.\n2. Crear lista.\n3. Buscar lista.\n4. Eliminar lista.\n\n0. Salir.\n")
@@ -310,6 +345,16 @@ def FourthMenu(_format):
 	FourthMenu(_format)
 
 def SearchPlaylistMenu(_format, toDo = "buscar"):
+	"""Esta función sirve para buscar una lista de reproducción y eliminarla o
+	ir a su menú específico, dependiendo del segundo argumento.
+	- El primer argumento corresponde al formato sobre el que se está trabajando,
+	mientras que el segundo corresponde al SRTING de función que se desea ejecutar:
+		° "buscar" (PREDERETMINADO): Llama a la función del menú específico de
+		playlist luego de encontrar la lista de reproducción.
+		° "eliminar": Elimina la lista encontrada luego de confirmar si el usuario
+		desea eliminarla.
+	-Esta función no retorna ningún valor. Al terminar vuelve al cuarto menú."""
+
 	print("\n===================0===================\n)
 	toSearch = input("¿Qué lista de reproducción desea "+ toDo +"? ")
 	results = Miscellaneous.BinarySearchInList(files.GetPlaylists(_format),toSearch)
@@ -334,6 +379,7 @@ def SearchPlaylistMenu(_format, toDo = "buscar"):
 				return
 		elif toDo == "buscar":
 			PlaylistMenu(_format, foundPlaylist)
+			return
 	else:
 		print("Listas encontradas:\n")
 		for foundPlaylistIndex in range(len(results)):
@@ -350,8 +396,19 @@ def SearchPlaylistMenu(_format, toDo = "buscar"):
 				return
 		elif toDo == "buscar":
 			PlaylistMenu(_format, foundPlaylist)
+			return
 
 def PlaylistMenu(_format, playlistName):
+
+	"""Esta función corresponde al menú específico de las listas de reproducción,
+	desde aquí el usuario tiene más opciones que puede ejecutar sobre estas.
+	- Como argumento recibe el formato dobre el que se está trabajando y el
+	nombre de la lista de reproducción.
+	- La primera opción permite ver el contenido ordenado de la lista.
+	- La segunda opción permite añadir un elemento a la lista.
+	- La tercera opción busca un elemento dentro de la lista para eliminarlo.
+	- La cuarta opción elimina la lista de reproducción y retorna al cuarto menú."""
+
 	print("\n" + playlistName.upper() + "\n")
 	print("1. Ver contenido de la lista.\n2. Añadir un elemento.\n3. Eliminar un elemento.\n4. Eliminar lista.\n\n0. Atrás.\n")
 	answer = Answer(["0","1","2","3","4"])
@@ -359,92 +416,30 @@ def PlaylistMenu(_format, playlistName):
 		return
 	elif answer == "1":
 		PrintPlaylist(_format,playlistName)
+		PlaylistMenu(_format,playlistName)
+		return
 	elif answer == "2":
 		AddPlaylistElement(_format,playlistName)
+		PlaylistMenu(_format,playlistName)
+		return
 	elif answer == "3":
 		DeletePlaylistElement(_format, playlistName)
+		PlaylistMenu(_format,playlistName)
+		return
 	elif answer == "4":
 		files.DeletePlaylist(_format,playlistName)
 		print("La lista fue eliminada.")
-	PlaylistMenu(_format, playlistName) #falta documentar
-
-def PrintPlaylist(_format,playlistName):
-	playlistPath = "playlist"+ os.sep + playlistName + ".txt"
-	SortListMenu(_format,playlistName,playlistPath) #falta documentar
-
-def AddPlaylistElement(_format, playlistName):
-	element = input("¿Qué elemento desea agregar a la lista? ")
-	results = Miscellaneous.SearchMainList(_format,element)
-	if len(results) == 0:
-		option = NotFoundMenu(_format, "mi"+MenuFormat(_format,False))
-		if option == "0":
-			return
-		else:
-			AddPlaylistElement(_format, playlistName)
-	elif len(results) == 1:
-		finalElement = results[0]
-		PrintListHead(_format)
-		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(finalElement["name"],finalElement["author"],finalElement["album"],finalElement["year"],finalElement["type"]))
-		print("¿Desea añadir este elemento a " + playlistName + "?\n1. Confirmar.\n0. Cancelar.")
-		answer = Answer(["0","1"])
-		if answer == 0:
-			print("No se añadió el elemento.\n")
-			return
-		else:
-			playlistPath = "playlist"+ os.sep + playlistName + ".txt"
-			files.AddEntry(finalElement ,_format , playlistPath)
-			print("Se añadió \""+finalElement["name"]+ "\" a " + playlistName + ". Volviendo al menú de la lista de reproducción.")
-	else:
-		finalElement = results[SelectListElement(len(results))]
-		PrintListHead(_format)
-		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(finalElement["name"],finalElement["author"],finalElement["album"],finalElement["year"],finalElement["type"]))
-		print("¿Desea añadir este elemento a " + playlistName + "?\n1. Confirmar.\n0. Cancelar.")
-		answer = Answer(["0","1"])
-		if answer == 0:
-			print("No se añadió el elemento.\n")
-			return
-		else:
-			playlistPath = "playlist"+ os.sep + playlistName + ".txt"
-			files.AddEntry(finalElement ,_format , playlistPath)
-			print("Se añadió \""+finalElement["name"]+ "\" a " + playlistName + ". Volviendo al menú de la lista de reproducción.") #falta documentar
-
-def DeletePlaylistElement(_format, playlistName):
-	playlistPath = "playlist"+ os.sep + playlistName + ".txt"
-	playlistList = file.ReadFormat(_format, playlistPath)
-	element = input("¿Qué elemento desea eliminar? ")
-	results = Miscellaneous.BinarySearch(playlistList,element)
-	if len(results) == 0:
-		option = NotFoundMenu(_format, playlistName)
-		if option == "0":
-			return
-		else:
-			DeletePlaylistElement(_format, playlistName)
-	elif len(results) == 1:
-		finalElement = results[0]
-		PrintListHead(_format)
-		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(finalElement["name"],finalElement["author"],finalElement["album"],finalElement["year"],finalElement["type"]))
-		print("¿Desea eliminar este elemento de " + playlistName + "?\n1. Confirmar.\n0. Cancelar.")
-		answer = Answer(["0","1"])
-		if answer == 0:
-			print("El elemento no se eliminó.\n")
-			return
-		else:
-			files.DeleteEntry(finalElement,_format,playlistPath)
-			print("Se eliminó el elemento de " + playlistName + ". Volviendo al menú de la lista de reproducción.")
-	else:
-		finalElement = results[SelectListElement(len(results))]
-		PrintListHead(_format)
-		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(finalElement["name"],finalElement["author"],finalElement["album"],finalElement["year"],finalElement["type"]))
-		print("¿Desea eliminar este elemento de " + playlistName + "?\n1. Confirmar.\n0. Cancelar.")
-		answer = Answer(["0","1"])
-		if answer == 0:
-			print("El elemento no se eliminó.\n")
-			return
-		else:
-			files.DeleteEntry(finalElement,_format,playlistPath)
-			print("Se eliminó el elemento de " + playlistName + ". Volviendo al menú de la lista de reproducción.") #falta documenetar
+		return
 
 def NewPlaylistMenu(_format):
+
+	"""Esta función se encarga de crear una nueva lista de reproducción y de
+	agregar elementos a esta.
+	- Como parametro recibe el formato sobre el que se está trabajando.
+	- Contiene un bucle que termina cuando el usuario deja de añadir elementos
+	a la lista.
+	- Al terminar, vuelve al cuarto menú."""
+
 	print("\n===================0===================\n")
 	print("\tCREAR LISTA DE REPRODUCCIÓN\n")
 	playlistName = input("Nombre de la lista de reproducción: ")
@@ -460,7 +455,7 @@ def NewPlaylistMenu(_format):
 			print("¿Desea añadir otro elemento a la lista?\n1. Aceptar.\n0. Cancelar.\n")
 			answer1 = Answer(["0","1"])
 			if answer1 == "0":
-				adding == False #falta documentar
+				adding == False
 
 """Desde aqui se declaran las funciones secundarias que son utilizadas dentro de
 las funciones de menús."""
@@ -490,7 +485,7 @@ def TakeElementInfo():
 	"""Esta función corresponde al menú donde se toman los datos de un elemento
 	(nombre, autor, album, etc.) y devuelve un diccionario que puede ser utilizado
 	para añadir un nuevo elemento o modificar uno existente.
-	Devuelve diccionario con datos introducidos por el usuario."""
+	- Devuelve diccionario con datos introducidos por el usuario."""
 
 	ElementDic = {"name": "" ,"author" : "" , "album" : "" , "year" : "", "type" : "" , "path" : ""}
 	ElementDic["name"] = input("Nombre: ")
@@ -545,6 +540,109 @@ def PrintListHead(_format):
 	else:
 		print("No.\t|\tNombre\t|\tProtagonista\t|\tÁlbum\t|\tAño\t|\tTipo\n")
 	return
+
+def PrintPlaylist(_format,playlistName):
+
+	"""Esta función construye la ruta de la lista de reproducción para pasarla
+	como argumento en el menuú de listas ordenadas, donde el usuario puede escoger
+	el orden por el cual desea visualizar el contenido de la lista.
+	-Como argumento recibe el formato sobre el que se está trabajando y el nombre
+	de la lista.
+	- Al terminar vueleve al menú específico de la lista."""
+
+	playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+	SortListMenu(_format,playlistName,playlistPath)
+	return
+
+def AddPlaylistElement(_format, playlistName):
+
+	"""Esta función se encarga de buscar un elemento del formato que se está
+	trabajando y añadirlo a la lista de reproducción. Antes de añadirlo le
+	pide al usuario confirmar que desea añadir el elemento.
+	- Como argumentos recibe el formato sobre el que se está trabajando y el
+	nombre de la lista de reproducción a la cual se le va a añadir el elemento.
+	- Al terminar, vuelve al menú específico de la lista."""
+
+	element = input("¿Qué elemento desea agregar a la lista? ")
+	results = Miscellaneous.SearchMainList(_format,element)
+	if len(results) == 0:
+		option = NotFoundMenu(_format, "mi"+MenuFormat(_format,False))
+		if option == "0":
+			return
+		else:
+			AddPlaylistElement(_format, playlistName)
+	elif len(results) == 1:
+		finalElement = results[0]
+		PrintListHead(_format)
+		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(finalElement["name"],finalElement["author"],finalElement["album"],finalElement["year"],finalElement["type"]))
+		print("¿Desea añadir este elemento a " + playlistName + "?\n1. Confirmar.\n0. Cancelar.")
+		answer = Answer(["0","1"])
+		if answer == 0:
+			print("No se añadió el elemento.\n")
+			return
+		else:
+			playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+			files.AddEntry(finalElement ,_format , playlistPath)
+			print("Se añadió \""+finalElement["name"]+ "\" a " + playlistName + ". Volviendo al menú de la lista de reproducción.")
+	else:
+		finalElement = results[SelectListElement(len(results))]
+		PrintListHead(_format)
+		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(finalElement["name"],finalElement["author"],finalElement["album"],finalElement["year"],finalElement["type"]))
+		print("¿Desea añadir este elemento a " + playlistName + "?\n1. Confirmar.\n0. Cancelar.")
+		answer = Answer(["0","1"])
+		if answer == 0:
+			print("No se añadió el elemento.\n")
+			return
+		else:
+			playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+			files.AddEntry(finalElement ,_format , playlistPath)
+			print("Se añadió \""+finalElement["name"]+ "\" a " + playlistName + ". Volviendo al menú de la lista de reproducción.")
+
+def DeletePlaylistElement(_format, playlistName):
+
+	"""Esta función se encarga de buscar un elemento en la lista de reproducción
+	para eliminarlo.
+	- Como argumentos recibe el formato sobre el que se está trabajando y el
+	nombre de la lista de reproducción.
+	- En el caso de no encontrar el elemento en la lista, le da la opción al
+	usuario de volver a buscar o salir.
+	- Antes de eliminar un elemento le pide al usuario confirmar la acción.
+	- Al terminar, vuelve al menú específico de la lista."""
+
+	playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+	playlistList = file.ReadFormat(_format, playlistPath)
+	element = input("¿Qué elemento desea eliminar? ")
+	results = Miscellaneous.BinarySearch(playlistList,element)
+	if len(results) == 0:
+		option = NotFoundMenu(_format, playlistName)
+		if option == "0":
+			return
+		else:
+			DeletePlaylistElement(_format, playlistName)
+	elif len(results) == 1:
+		finalElement = results[0]
+		PrintListHead(_format)
+		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(finalElement["name"],finalElement["author"],finalElement["album"],finalElement["year"],finalElement["type"]))
+		print("¿Desea eliminar este elemento de " + playlistName + "?\n1. Confirmar.\n0. Cancelar.")
+		answer = Answer(["0","1"])
+		if answer == 0:
+			print("El elemento no se eliminó.\n")
+			return
+		else:
+			files.DeleteEntry(finalElement,_format,playlistPath)
+			print("Se eliminó el elemento de " + playlistName + ". Volviendo al menú de la lista de reproducción.")
+	else:
+		finalElement = results[SelectListElement(len(results))]
+		PrintListHead(_format)
+		print("1.\t|\t{0}\t|\t{1}\t|\t{2}\t|\t{3}\t|\t{4}\n".format(finalElement["name"],finalElement["author"],finalElement["album"],finalElement["year"],finalElement["type"]))
+		print("¿Desea eliminar este elemento de " + playlistName + "?\n1. Confirmar.\n0. Cancelar.")
+		answer = Answer(["0","1"])
+		if answer == 0:
+			print("El elemento no se eliminó.\n")
+			return
+		else:
+			files.DeleteEntry(finalElement,_format,playlistPath)
+			print("Se eliminó el elemento de " + playlistName + ". Volviendo al menú de la lista de reproducción.")
 
 def SelectListElement(listLength):
 
