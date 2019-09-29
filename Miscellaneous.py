@@ -46,16 +46,18 @@ def BinarySearchInList(_list, item):
     _list.sort()
     first = 0
     last = len(_list)-1
+    elementsFound = []
     found = False
     while first <= last and not found:
         middle = (first + last) // 2
         if _list[middle] == item:
-            return
+            elementsFound.append(_list[middle])
         else:
             if item < _list[middle]:
                 last = middle - 1
             else:
                 first = middle + 1
+    return elementsFound
 
 def BinarySearch(_list, item):
 
