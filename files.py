@@ -221,7 +221,22 @@ def DeletePlaylist(_format, name):
     path = _format + os.sep + "playlists" + os.sep + name + ".txt"
     os.remove(path)
 
+
+def GetPlaylists(_format):
+    """Recibe un formato y devuelve una lista con cadenas indicando el nombre de archivo de todas
+    las playlist del formato.
+    :param _format: Formato, ver ReadFormat.
+    :type _format: str
+    """
+    path = _format + os.sep + "playlists"
+    return list(os.walk(path))[-1][-1]
+
+
 #### Tests
+
+
+print(GetPlaylists("pictures"))
+"""
 import MainListTest
 
 music = MainListTest.GetList()
@@ -249,4 +264,6 @@ for i in ReadFormat("music"):
     print(GetNewPosition(i, ReadFormat("music")))
 
 
+
 DeletePlaylist("pictures", "musica_en_fotosxd")
+"""
