@@ -240,7 +240,7 @@ def GetPlaylists(_format):
 #### Tests
 
 
-print(GetPlaylists("music"))
+#print(GetPlaylists("music"))
 
 """
 import MainListTest

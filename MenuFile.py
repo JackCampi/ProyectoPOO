@@ -341,7 +341,7 @@ def FourthMenu(_format):
 	elif answer == "3":
 		SearchPlaylistMenu(_format)
 	elif answer == "4":
-		SearchPlaylistMenu(_format,"Eliminar")
+		SearchPlaylistMenu(_format,"eliminar")
 	FourthMenu(_format)
 
 def SearchPlaylistMenu(_format, toDo = "buscar"):
