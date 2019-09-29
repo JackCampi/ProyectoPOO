@@ -168,7 +168,7 @@ def SearchMenu(_format):
 		searchElement = searchResults[0]
 	else:
 		PrintList(_format,searchResults)
-		searchElement = searchResults[SelectListElement(len(searchResult))]
+		searchElement = searchResults[SelectListElement(len(searchResults))]
 	FoundElementMenu(_format, searchElement)
 
 def FoundElementMenu(_format, foundElement):
