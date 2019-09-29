@@ -326,7 +326,7 @@ def FourthMenu(_format):
 		return
 	elif answer == "1":
 		playlists = files.GetPlaylists(_format)
-		if len(playlist) == 0:
+		if len(playlists) == 0:
 			print("No hay listas de reproducción en " + MenuFormat(_format) + ".")
 		else:
 			for playlistIndex in range(len(playlists)):
@@ -355,7 +355,7 @@ def SearchPlaylistMenu(_format, toDo = "buscar"):
 		desea eliminarla.
 	-Esta función no retorna ningún valor. Al terminar vuelve al cuarto menú."""
 
-	print("\n===================0===================\n)
+	print("\n===================0===================\n")
 	toSearch = input("¿Qué lista de reproducción desea "+ toDo +"? ")
 	results = Miscellaneous.BinarySearchInList(files.GetPlaylists(_format),toSearch)
 	if len(results) == 0:
@@ -455,7 +455,7 @@ def NewPlaylistMenu(_format):
 			print("¿Desea añadir otro elemento a la lista?\n1. Aceptar.\n0. Cancelar.\n")
 			answer1 = Answer(["0","1"])
 			if answer1 == "0":
-				adding == False
+				adding = False
 
 """Desde aqui se declaran las funciones secundarias que son utilizadas dentro de
 las funciones de menús."""
@@ -610,7 +610,7 @@ def DeletePlaylistElement(_format, playlistName):
 	- Al terminar, vuelve al menú específico de la lista."""
 
 	playlistPath = "playlist"+ os.sep + playlistName + ".txt"
-	playlistList = file.ReadFormat(_format, playlistPath)
+	playlistList = files.ReadFormat(_format, playlistPath)
 	element = input("¿Qué elemento desea eliminar? ")
 	results = Miscellaneous.BinarySearch(playlistList,element)
 	if len(results) == 0:
