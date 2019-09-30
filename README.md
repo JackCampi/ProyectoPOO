@@ -7,6 +7,8 @@ recomendable escribirlos aquí para eliminarlos después, importantísimo
 escribir los pasos y lo que dice el python para poder reproducir el 
 error correctamente.
 
+1. ¿se puede agregar dos veces el mismo elemento?
+
 1. la opción mis listas del menú listas de reproduccion me lleva la mismo menú en buble
  Pasos: (1, 2, 1, 1)
  
