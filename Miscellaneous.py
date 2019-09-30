@@ -1,7 +1,7 @@
 '''Este es el módulo miselaneo donde se encuentran diversas funciones
    referentes a la filtración de datos'''
 
-#import MainListTest #importación de la Main_list para hacer pruebas
+import MainListTest #importación de la Main_list para hacer pruebas
                     #se modificará cuando se tengan los archivos de texto
 import files # importación del módulo de Juan
 
@@ -13,8 +13,8 @@ def SortMainList(_format, key):
        RETURN: lista de diccionarios de toda la Main_list ordenados
        por la clave.'''
 
-    #mainList = MainListTest.GetList() # llamada a la Main_list de prueba
-    mainList = files.ReadFormat(_format) # fución creada por Juan
+    mainList = MainListTest.GetList() # llamada a la Main_list de prueba
+    #mainList = files.ReadFormat(_format) # fución creada por Juan
     return SortList(mainList, key)
 
 def SortList(_list, key):
@@ -38,9 +38,39 @@ def SearchMainList(_format, item):
        RETURN: lista de diccionarios que coincidan con la busqueda
        NOTA: busca tanto en nombre como en álbum, autor, año, etc...'''
 
-    #mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
-    mainList = files.ReadFormat(_format) # fución creada por Juan
-    return BinarySearch(mainList, item)
+    mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
+    #mainList = files.ReadFormat(_format) # fución creada por Juan
+    #return BinarySearch(mainList, item)
+    return SearchItemInDict(mainList, item)
+
+def SearchItemInDict(_list, item):
+    elementsFound = []
+    for key in _list[0].keys():
+        soartedList = SortList(_list, key)
+        for i in range(len(soartedList)):
+            if item in soartedList[i][key]:
+                elementsFound.append(soartedList[i])
+    cleanedList = CleanList(elementsFound)
+    cleanedSoartedList = SortList(cleanedList, "name")
+    return cleanedSoartedList
+
+def CleanList(_list):
+    cleanedList = []
+    for i in range(len(_list)):
+        if _list[i] not in cleanedList:
+            cleanedList.append(_list[i])
+    return cleanedList
+
+def SearchItemInList(_list, item):
+    soartedList = sorted(_list)
+    elementsFound = []
+    for i in range(len(soartedList)):
+        if item in soartedList[i]:
+            elementsFound.append(soartedList[i])
+    return elementsFound
+
+
+'''---------------------------------------------------------------------------------------------------'''
 
 def BinarySearchInList(_list, item):
     _list.sort()
@@ -52,6 +82,7 @@ def BinarySearchInList(_list, item):
         middle = (first + last) // 2
         if _list[middle] == item:
             elementsFound.append(_list[middle])
+            found = True
         else:
             if item < _list[middle]:
                 last = middle - 1
@@ -127,9 +158,12 @@ def CheckLeft(_list, index, item, key):
     aquí se realizan pruebas para ver si todo funciona correctamente,
     se borrará cuando todo este listo'''
 
+playlists = ["playlist", "playlist2", "main", "salsa", "rumba"]
+
 #print(SortMainList("music","name"))
 '''for i in SortMainList("music", "type"):
     print(i)'''
 #print(SearchMainList("music", "pop"))
-'''for i in SearchMainList("music", "pop"):
+'''for i in SearchMainList("music", "19"):
     print(i)'''
+#print(SearchItemInList(playlists, "p"))
