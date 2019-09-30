@@ -20,10 +20,7 @@ def MakeEntry(string):
     entry = {}
     assert len(elements) == len(order), "Entrada inválida"
     for i in range(len(order)):
-        if order[i] == "year":
-            entry[order[i]] = int(elements[i])
-        else:
-            entry[order[i]] = elements[i]
+        entry[order[i]] = elements[i]
     return entry
 
 
