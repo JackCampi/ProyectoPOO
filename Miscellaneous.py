@@ -13,8 +13,8 @@ def SortMainList(_format, key):
        RETURN: lista de diccionarios de toda la Main_list ordenados
        por la clave.'''
 
-    mainList = MainListTest.GetList() # llamada a la Main_list de prueba
-    #mainList = files.ReadFormat(_format) # fución creada por Juan
+    #mainList = MainListTest.GetList() # llamada a la Main_list de prueba
+    mainList = files.ReadFormat(_format) # fución creada por Juan
     return SortList(mainList, key)
 
 def SortList(_list, key):
@@ -38,8 +38,8 @@ def SearchMainList(_format, item):
        RETURN: lista de diccionarios que coincidan con la busqueda
        NOTA: busca tanto en nombre como en álbum, autor, año, etc...'''
 
-    mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
-    #mainList = files.ReadFormat(_format) # fución creada por Juan
+    #mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
+    mainList = files.ReadFormat(_format) # fución creada por Juan
     #return BinarySearch(mainList, item)
     return SearchItemInDict(mainList, item)
 
