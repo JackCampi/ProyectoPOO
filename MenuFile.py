@@ -649,7 +649,7 @@ def SelectListElement(listLength):
 	"""Esta función recibe el largo de una lista y devuelve el indice del
 	elemento que el usuario escoga."""
 
-	print("¿Cuál desea seleccionar? ")
+	print("\n¿Cuál desea seleccionar? ")
 	selectElement = Answer([str(x) for x in range(1,listLength+1)])
 	return int(selectElement) - 1
 
