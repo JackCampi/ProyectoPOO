@@ -53,6 +53,8 @@ def SearchItemInDict(_list, item):
        en alguna de sus llaves coincida el item buscado'''
 
     elementsFound = []
+    if len(_list) == 0:
+        return elementsFound
     for key in _list[0].keys(): #recorre todas las llaves del diccionario
         for i in range(len(_list)):
             if item in _list[i][key]:
@@ -170,7 +172,7 @@ playlists = ["playlist", "playlist2", "main", "salsa", "rumba"]
 #print(SortMainList("music","name"))
 '''for i in SortMainList("music", "type"):
     print(i)'''
-#print(SearchMainList("music", "pop"))
+print(SearchMainList("music", "pop"))
 '''for i in SearchMainList("music", "19"):
     print(i)'''
 #print(SearchItemInList(playlists, "p"))
