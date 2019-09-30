@@ -301,7 +301,7 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 			print("No hay elementos en "+listName+".")
 		else:
 			PrintList(_format,sortedList)
-	SortListMenu(_format)
+	SortListMenu(_format, listName)
 
 def FourthMenu(_format):
 
