@@ -274,8 +274,10 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+			wait = input("Pulse Enter para continuar...")
 		else:
 			PrintList(_format,sortedList)
+			wait = input("Pulse Enter para continuar...")
 	elif answer4 == "2":
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"author")
@@ -283,8 +285,10 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+			wait = input("Pulse Enter para continuar...")
 		else:
 			PrintList(_format,sortedList)
+			wait = input("Pulse Enter para continuar...")
 	elif answer4 == "3":
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"album")
@@ -292,8 +296,10 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+			wait = input("Pulse Enter para continuar...")
 		else:
 			PrintList(_format,sortedList)
+			wait = input("Pulse Enter para continuar...")
 	elif answer4 == "4":
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"year")
@@ -301,8 +307,10 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+			wait = input("Pulse Enter para continuar...")
 		else:
 			PrintList(_format,sortedList)
+			wait = input("Pulse Enter para continuar...")
 	elif answer4 == "5":
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"type")
@@ -310,8 +318,10 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+			wait = input("Pulse Enter para continuar...")
 		else:
 			PrintList(_format,sortedList)
+			wait = input("Pulse Enter para continuar...")
 	SortListMenu(_format, listName)
 
 def FourthMenu(_format):
@@ -341,6 +351,7 @@ def FourthMenu(_format):
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay listas de reproducción en " + MenuFormat(_format) + ".")
 			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+			wait = input("Pulse Enter para continuar...")
 		else:
 			for playlistIndex in range(len(playlists)):
 				print(str(playlistIndex+1)+"\t|\t"+playlists[playlistIndex] + ".\n")
@@ -431,6 +442,7 @@ def PlaylistMenu(_format, playlistName):
 		return
 	elif answer == "1":
 		PrintPlaylist(_format,playlistName)
+		wait = input("Pulse Enter para continuar...")
 		PlaylistMenu(_format,playlistName)
 		return
 	elif answer == "2":
