@@ -33,25 +33,32 @@ def SortList(_list, key):
 def SearchMainList(_format, item):
 
     '''fución que llama al método ReadFormat para obtener la Main_list
-       de algún formato y un item para llamar a la fución BinarySearch
+       de algún formato y un item para llamar a la fución SearchItemInDict
        y buscar el elemento
        RETURN: lista de diccionarios que coincidan con la busqueda
        NOTA: busca tanto en nombre como en álbum, autor, año, etc...'''
 
     #mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
     mainList = files.ReadFormat(_format) # fución creada por Juan
-    #return BinarySearch(mainList, item)
     return SearchItemInDict(mainList, item)
 
 def SearchItemInDict(_list, item):
+
+    '''item: string que se quiere buscar en el diccionario.
+       esta fución que buca elemento por elemento en todas las llaves de un
+       diccionario si un item coincide con lo guardado en los diccionarios.
+       la función va guardando todas las coincidencias que encuentre y luego
+       llama a la fucion CleanList para deshacerse de los elementos repetidos
+       RETURN: devuelve una lista de diccionarios ordenados por nombre donde
+       en alguna de sus llaves coincida el item buscado'''
+
     elementsFound = []
-    for key in _list[0].keys():
-        soartedList = SortList(_list, key)
-        for i in range(len(soartedList)):
-            if item in soartedList[i][key]:
-                elementsFound.append(soartedList[i])
-    cleanedList = CleanList(elementsFound)
-    cleanedSoartedList = SortList(cleanedList, "name")
+    for key in _list[0].keys(): #recorre todas las llaves del diccionario
+        for i in range(len(_list)):
+            if item in _list[i][key]:
+                elementsFound.append(_list[i])
+    cleanedList = CleanList(elementsFound) #elimina elementos repetidos
+    cleanedSoartedList = SortList(cleanedList, "name") #organiza el resultado por nombres
     return cleanedSoartedList
 
 def CleanList(_list):
