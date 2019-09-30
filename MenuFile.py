@@ -211,7 +211,7 @@ def AddToPlaylistMenu(_format, toAddElement):
 		for playlistIndex in range(len(playlistList)):
 			print(str(playlistIndex+1)+"\t|\t"+ playlistList[playlistIndex] )
 		playlistName = playlistList[SelectListElement(len(playlistList))]
-		playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+		playlistPath = "playlists"+ os.sep + playlistName + ".txt"
 		files.AddEntry(toAddElement ,_format , playlistPath)
 		print("Se añadió \""+toAddElement["name"]+ "\" a " + playlistName + ".")
 		return
@@ -357,7 +357,7 @@ def SearchPlaylistMenu(_format, toDo = "buscar"):
 
 	print("\n===================0===================\n")
 	toSearch = input("¿Qué lista de reproducción desea "+ toDo +"? ")
-	results = Miscellaneous.BinarySearchInList(files.GetPlaylists(_format),toSearch)
+	results = Miscellaneous.SearchItemInList(files.GetPlaylists(_format),toSearch)
 	if len(results) == 0:
 		print("\nNo se encontró ninguna lista de reproducción en " + MenuFormat(_format) +".\n")
 		print("1. Volver a buscar.\n\n0. Atrás.\n")
@@ -550,7 +550,7 @@ def PrintPlaylist(_format,playlistName):
 	de la lista.
 	- Al terminar vueleve al menú específico de la lista."""
 
-	playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+	playlistPath = "playlists"+ os.sep + playlistName + ".txt"
 	SortListMenu(_format,playlistName,playlistPath)
 	return
 
@@ -581,7 +581,7 @@ def AddPlaylistElement(_format, playlistName):
 			print("No se añadió el elemento.\n")
 			return
 		else:
-			playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+			playlistPath = "playlists"+ os.sep + playlistName + ".txt"
 			files.AddEntry(finalElement ,_format , playlistPath)
 			print("Se añadió \""+finalElement["name"]+ "\" a " + playlistName + ". Volviendo al menú de la lista de reproducción.")
 	else:
@@ -594,7 +594,7 @@ def AddPlaylistElement(_format, playlistName):
 			print("No se añadió el elemento.\n")
 			return
 		else:
-			playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+			playlistPath = "playlists"+ os.sep + playlistName + ".txt"
 			files.AddEntry(finalElement ,_format , playlistPath)
 			print("Se añadió \""+finalElement["name"]+ "\" a " + playlistName + ". Volviendo al menú de la lista de reproducción.")
 
@@ -609,10 +609,10 @@ def DeletePlaylistElement(_format, playlistName):
 	- Antes de eliminar un elemento le pide al usuario confirmar la acción.
 	- Al terminar, vuelve al menú específico de la lista."""
 
-	playlistPath = "playlist"+ os.sep + playlistName + ".txt"
+	playlistPath = "playlists"+ os.sep + playlistName + ".txt"
 	playlistList = files.ReadFormat(_format, playlistPath)
 	element = input("¿Qué elemento desea eliminar? ")
-	results = Miscellaneous.BinarySearch(playlistList,element)
+	results = Miscellaneous.SearchItemInList(playlistList,element)
 	if len(results) == 0:
 		option = NotFoundMenu(_format, playlistName)
 		if option == "0":
