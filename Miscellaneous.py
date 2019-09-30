@@ -1,5 +1,5 @@
 '''Este es el módulo miselaneo donde se encuentran diversas funciones
-   referentes a la filtración de datos'''
+   referentes a la filtración de datos.'''
 
 import MainListTest #importación de la Main_list para hacer pruebas
                     #se modificará cuando se tengan los archivos de texto
@@ -22,7 +22,7 @@ def SortList(_list, key):
     '''fución que recibe una lista, bien sea la Main_list o una playlist
        y la filtra por una clave elegida en el menú.
        RETURN: lista de diccionarios de los elementos en Main_list
-       organizados por clave'''
+       organizados por clave.'''
 
     try:
         return sorted(_list, key = lambda _dict : _dict[key])
@@ -34,8 +34,8 @@ def SearchMainList(_format, item):
 
     '''fución que llama al método ReadFormat para obtener la Main_list
        de algún formato y un item para llamar a la fución SearchItemInDict
-       y buscar el elemento
-       RETURN: lista de diccionarios que coincidan con la busqueda
+       y buscar el elemento.
+       RETURN: lista de diccionarios que coincidan con la busqueda.
        NOTA: busca tanto en nombre como en álbum, autor, año, etc...'''
 
     #mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
@@ -48,12 +48,12 @@ def SearchItemInDict(_list, item):
        esta fución que buca elemento por elemento en todas las llaves de un
        diccionario si un item coincide con lo guardado en los diccionarios.
        la función va guardando todas las coincidencias que encuentre y luego
-       llama a la fucion CleanList para deshacerse de los elementos repetidos
+       llama a la fucion CleanList para deshacerse de los elementos repetidos.
        RETURN: devuelve una lista de diccionarios ordenados por nombre donde
-       en alguna de sus llaves coincida el item buscado'''
+       en alguna de sus llaves coincida el item buscado.'''
 
     elementsFound = []
-    if len(_list) == 0:
+    if len(_list) == 0: #primero checkea que la lista no este vacia
         return elementsFound
     for key in _list[0].keys(): #recorre todas las llaves del diccionario
         for i in range(len(_list)):
@@ -64,6 +64,10 @@ def SearchItemInDict(_list, item):
     return cleanedSoartedList
 
 def CleanList(_list):
+
+    '''función que recibe una lista y elimina todos los elementos repetidos.
+       RETURN: lista sin elementos repetidos.'''
+
     cleanedList = []
     for i in range(len(_list)):
         if _list[i] not in cleanedList:
@@ -71,6 +75,12 @@ def CleanList(_list):
     return cleanedList
 
 def SearchItemInList(_list, item):
+
+    '''función que recibe una lista de strings y un item (string) que desea
+       buscar dentro de la lista. recorre elemento por elemento y guarda los
+       elementos donde coincida el item.
+       RETURN: lista de todas las coincidencias.'''
+
     soartedList = sorted(_list)
     elementsFound = []
     for i in range(len(soartedList)):
@@ -79,9 +89,20 @@ def SearchItemInList(_list, item):
     return elementsFound
 
 
-'''---------------------------------------------------------------------------------------------------'''
+'''-------------------------------------BETA---------------------------------------------------------
+                    Aquí encontrarás funciones en fase beta que por el momento
+                    no son utilizadas en el fucionamiento del programa pero que
+                    en un futuro pueden servir.
+                    NOTA: algunas no son del todo funcionales. Se retomará
+                    cuando sean requeridas.'''
 
 def BinarySearchInList(_list, item):
+
+    '''FASE BETA: función que recibe una lista de elemntos y realiza
+       una busqueda binaria hasta encontrar la primera coincidencias
+       FALTA: que revise si a los lados tambien se encuentran elementos
+       que coincidan con la busqueda'''
+
     _list.sort()
     first = 0
     last = len(_list)-1
@@ -106,7 +127,11 @@ def BinarySearch(_list, item):
        y cuando se encuentre la primera coincidencia se llama dos
        métodos para comprobar si hay más elementos que coincidan
        RETURN: lista de diccionarios que coincidan con la busqueda
-       NOTA: busca tanto en nombre como en álbum, autor, año, etc...'''
+       NOTA: busca tanto en nombre como en álbum, autor, año, etc...
+       NOTA2: se descontinuó la función porque solo funciona si el item
+       coincide al 100% con los elementos de los diccionario y no
+       fuiciona si solo se pone un pedazo. Se cambió por la función
+       SearchItemInDict.'''
 
     elementsFound = []
     for key in _list[0].keys(): # recorre la lista mirando cada una de las llaves
@@ -134,10 +159,10 @@ def BinarySearch(_list, item):
 def CheckRight(_list, index, item, key):
 
     '''fución que revisa índice por índice si los elementos
-       a la derecha de la primera coincidencia también coinciden
+       a la derecha de la primera coincidencia también coinciden.
        RETURN: int del numero de elementos a la derecha
-       que coinciden con la busqueda
-       NOTA: fución exclusiva para el fucionamiento de BinarySearch'''
+       que coinciden con la busqueda.
+       NOTA: fución exclusiva para el fucionamiento de BinarySearch.'''
 
     if _list[index][key] != item:
         return 0
@@ -151,9 +176,9 @@ def CheckLeft(_list, index, item, key):
 
     '''fución que revisa índice por índice si los elementos
        a la izquierda de la primera coincidencia también coinciden
-       RETURN: int del numero de elementos a la izquierda
-       que coinciden con la busqueda
-       NOTA: fución exclusiva para el fucionamiento de BinarySearch'''
+       RETURN: int del numero de elementos a la izquierda.
+       que coinciden con la busqueda.
+       NOTA: fución exclusiva para el fucionamiento de BinarySearch.'''
 
     if _list[index][key] != item:
         return 0
@@ -167,12 +192,12 @@ def CheckLeft(_list, index, item, key):
     aquí se realizan pruebas para ver si todo funciona correctamente,
     se borrará cuando todo este listo'''
 
-playlists = ["playlist", "playlist2", "main", "salsa", "rumba"]
+#playlists = ["playlist", "playlist2", "main", "salsa", "rumba"]
 
 #print(SortMainList("music","name"))
 '''for i in SortMainList("music", "type"):
     print(i)'''
-print(SearchMainList("music", "pop"))
+#print(SearchMainList("music", "pop"))
 '''for i in SearchMainList("music", "19"):
     print(i)'''
 #print(SearchItemInList(playlists, "p"))
