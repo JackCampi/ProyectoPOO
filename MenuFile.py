@@ -100,7 +100,8 @@ def ThirdMenu(_format):
 	if answer3 == "0":
 		return
 	elif answer3 == "1":
-		SortListMenu(_format, "mi"+ MenuFormat(_format,False))
+		listName = "mi"+ MenuFormat(_format,False)
+		SortListMenu(_format, listName )
 	elif answer3 == "2":
 		SearchMenu(_format)
 	elif answer3 == "3":
@@ -242,7 +243,7 @@ def NotFoundMenu(_format, listName ):
 	en la función donde fue llamada."""
 
 	print("No se encontró ningún elemento en " + listName +".\n")
-	print("1. Volver a buscar.\n\n0. Atrás.\n")
+	print("1. Volver a buscar.\n0. Atrás.\n")
 	answer = Answer(["0","1"])
 	return answer
 
@@ -270,35 +271,45 @@ def SortListMenu(_format, listName , listPath = "Main_list.txt"):
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"name")
 		if len(sortedList) == 0:
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 		else:
 			PrintList(_format,sortedList)
 	elif answer4 == "2":
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"author")
 		if len(sortedList) == 0:
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 		else:
 			PrintList(_format,sortedList)
 	elif answer4 == "3":
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"album")
 		if len(sortedList) == 0:
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 		else:
 			PrintList(_format,sortedList)
 	elif answer4 == "4":
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"year")
 		if len(sortedList) == 0:
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 		else:
 			PrintList(_format,sortedList)
 	elif answer4 == "5":
 		listToPrint = files.ReadFormat(_format,listPath)
 		sortedList = Miscellaneous.SortList(listToPrint,"type")
 		if len(sortedList) == 0:
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay elementos en "+listName+".")
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 		else:
 			PrintList(_format,sortedList)
 	SortListMenu(_format, listName)
@@ -327,11 +338,13 @@ def FourthMenu(_format):
 	elif answer == "1":
 		playlists = files.GetPlaylists(_format)
 		if len(playlists) == 0:
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 			print("No hay listas de reproducción en " + MenuFormat(_format) + ".")
+			print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
 		else:
 			for playlistIndex in range(len(playlists)):
 				print(str(playlistIndex+1)+"\t|\t"+playlists[playlistIndex] + ".\n")
-			print("1. Seleccionar una lista de reproducción.\n\n0. Atrás.\n")
+			print("\n1. Seleccionar una lista de reproducción.\n0. Atrás.\n")
 			answer1 = Answer(["0","1"])
 			if answer1 == "1":
 				playlistName = playlists[SelectListElement(len(playlists))]
@@ -359,8 +372,9 @@ def SearchPlaylistMenu(_format, toDo = "buscar"):
 	toSearch = input("¿Qué lista de reproducción desea "+ toDo +"? ")
 	results = Miscellaneous.SearchItemInList(files.GetPlaylists(_format),toSearch)
 	if len(results) == 0:
-		print("\nNo se encontró ninguna lista de reproducción en " + MenuFormat(_format) +".\n")
-		print("1. Volver a buscar.\n\n0. Atrás.\n")
+		print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+		print("No se encontró ninguna lista de reproducción en " + MenuFormat(_format) +".\n")
+		print("1. Volver a buscar.\n0. Atrás.\n")
 		answer = Answer(["0","1"])
 		if answer == "0":
 			return
@@ -409,7 +423,8 @@ def PlaylistMenu(_format, playlistName):
 	- La tercera opción busca un elemento dentro de la lista para eliminarlo.
 	- La cuarta opción elimina la lista de reproducción y retorna al cuarto menú."""
 
-	print("\n" + playlistName.upper() + "\n")
+	print("\n===================0===================\n")
+	print("\t" + playlistName.upper() + "\n")
 	print("1. Ver contenido de la lista.\n2. Añadir un elemento.\n3. Eliminar un elemento.\n4. Eliminar lista.\n\n0. Atrás.\n")
 	answer = Answer(["0","1","2","3","4"])
 	if answer == "0":
