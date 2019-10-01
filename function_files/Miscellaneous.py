@@ -3,7 +3,7 @@
 
 import MainListTest #importación de la Main_list para hacer pruebas
                     #se modificará cuando se tengan los archivos de texto
-import files # importación del módulo de Juan
+from function_files import files # importación del módulo de Juan
 
 def SortMainList(_format, key):
 
