@@ -660,8 +660,3 @@ def SortListMenuOptions(_format):
 		return "1. Por nombre.\n2. Por artista.\n3. Por álbum.\n4. Por año.\n5. Por género.\n\n0. Atrás.\n"
 	else:
 		return "1. Por nombre.\n2. Por protagonista.\n3. Por álbum.\n4. Por año.\n5. Por tipo.\n\n0. Atrás.\n"
-
-"""Aquí se ejecuta el programa"""
-
-main()
-#COMENTARIO

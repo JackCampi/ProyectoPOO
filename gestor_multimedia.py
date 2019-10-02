@@ -14,7 +14,7 @@ ARCHIVOS DE CÓDIGO:
     - files.py
     - Miscellaneous.py """
 
-import MenuFile
+from function_files import MenuFile
 
 def main():
 
@@ -48,3 +48,6 @@ def LogOut():
 		return True
 	else:
 		return LogOut()
+
+"""Aquí se ejecuta el programa"""
+main()
