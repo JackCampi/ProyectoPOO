@@ -1,6 +1,7 @@
 '''Este es el módulo misceláneo, donde se encuentran diversas funciones
    referentes a la filtración de datos.'''
 
+
 from function_files import files # importación del módulo de Juan
 
 
@@ -12,7 +13,7 @@ def SortMainList(_format, key):
        RETURN: lista de diccionarios de toda la Main_list ordenados
        por la clave.'''
 
-    #mainList = MainListTest.GetList() # llamada a la Main_list de prueba
+
     mainList = files.ReadFormat(_format) # función creada por Juan
     return SortList(mainList, key)
 
@@ -186,17 +187,3 @@ def CheckLeft(_list, index, item, key):
             return 1
         else:
             return 1 + CheckLeft(_list, index - 1, item, key)
-
-'''---------------------------ZONA DE PRUEBAS----------------------------------------------------------
-    aquí se realizan pruebas para ver si todo funciona correctamente,
-    se borrará cuando todo este listo'''
-
-#playlists = ["playlist", "playlist2", "main", "salsa", "rumba"]
-
-#print(SortMainList("music","name"))
-'''for i in SortMainList("music", "type"):
-    print(i)'''
-#print(SearchMainList("music", "pop"))
-'''for i in SearchMainList("music", "19"):
-    print(i)'''
-#print(SearchItemInList(playlists, "p"))
