@@ -6,7 +6,7 @@
 Bienvenido al gestor de multimedia, este programa le permitirá almacenar sus
 archivos multimedia como música, fotos o videos, y poder manejarlos de manera
 que pueda ordenarlos y visualizarlos con mayor facilidad. Para ejecutarlo, debe
-abrir el archivo (NOMBRE DEL ARCHIVO) *, donde se encontrará con el menú
+abrir el archivo gestor_multimedia.py *, donde se encontrará con el menú
 principal del programa. Allí podrá visualizar las diferentes opciones que
 dispone para comenzar a utilizar el programa.
 
