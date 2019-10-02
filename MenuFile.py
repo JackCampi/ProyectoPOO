@@ -2,8 +2,8 @@
 funciones de Miscellaneous.py y files.py, los cuales corresponden al manejo de
 los archivos y la información."""
 
-import Miscellaneous
-import files
+from function_files import Miscellaneous
+from function_files import files
 import os
 
 def main():

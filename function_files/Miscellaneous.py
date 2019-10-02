@@ -1,25 +1,25 @@
-'''Este es el módulo miselaneo donde se encuentran diversas funciones
+'''Este es el módulo misceláneo, donde se encuentran diversas funciones
    referentes a la filtración de datos.'''
 
 import MainListTest #importación de la Main_list para hacer pruebas
                     #se modificará cuando se tengan los archivos de texto
-import files # importación del módulo de Juan
+from function_files import files # importación del módulo de Juan
 
 def SortMainList(_format, key):
 
-    '''fución que llama al método ReadFormat para obtener la Main_list
+    '''función que llama al método ReadFormat para obtener la Main_list
        de un formato en específico y luego se las pasa a la función
        SortList para ser ordenadas de acuerdo a una llave o criterio.
        RETURN: lista de diccionarios de toda la Main_list ordenados
        por la clave.'''
 
     #mainList = MainListTest.GetList() # llamada a la Main_list de prueba
-    mainList = files.ReadFormat(_format) # fución creada por Juan
+    mainList = files.ReadFormat(_format) # función creada por Juan
     return SortList(mainList, key)
 
 def SortList(_list, key):
 
-    '''fución que recibe una lista, bien sea la Main_list o una playlist
+    '''función que recibe una lista, bien sea la Main_list o una playlist
        y la filtra por una clave elegida en el menú.
        RETURN: lista de diccionarios de los elementos en Main_list
        organizados por clave.'''
@@ -32,24 +32,24 @@ def SortList(_list, key):
 
 def SearchMainList(_format, item):
 
-    '''fución que llama al método ReadFormat para obtener la Main_list
-       de algún formato y un item para llamar a la fución SearchItemInDict
+    '''función que llama al método ReadFormat para obtener la Main_list
+       de algún formato y un item para llamar a la función SearchItemInDict
        y buscar el elemento.
-       RETURN: lista de diccionarios que coincidan con la busqueda.
+       RETURN: lista de diccionarios que coincidan con la búsqueda.
        NOTA: busca tanto en nombre como en álbum, autor, año, etc...'''
 
     #mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
-    mainList = files.ReadFormat(_format) # fución creada por Juan
+    mainList = files.ReadFormat(_format) # función creada por Juan
     return SearchItemInDict(mainList, item)
 
 def SearchItemInDict(_list, item):
 
     '''item: string que se quiere buscar en el diccionario.
-       esta fución que buca elemento por elemento en todas las llaves de un
+       esta función que buca elemento por elemento en todas las llaves de un
        diccionario si un item coincide con lo guardado en los diccionarios.
        la función va guardando todas las coincidencias que encuentre y luego
-       llama a la fucion CleanList para deshacerse de los elementos repetidos.
-       RETURN: devuelve una lista de diccionarios ordenados por nombre donde
+       llama a la función CleanList para deshacerse de los elementos repetidos.
+       RETURN: devuelve una lista de diccionarios ordenados por nombre, donde
        en alguna de sus llaves coincida el item buscado.'''
 
     elementsFound = []
@@ -99,9 +99,9 @@ def SearchItemInList(_list, item):
 def BinarySearchInList(_list, item):
 
     '''FASE BETA: función que recibe una lista de elemntos y realiza
-       una busqueda binaria hasta encontrar la primera coincidencias
+       una búsqueda binaria hasta encontrar la primera coincidencias
        FALTA: que revise si a los lados tambien se encuentran elementos
-       que coincidan con la busqueda'''
+       que coincidan con la búsqueda'''
 
     _list.sort()
     first = 0
@@ -122,21 +122,21 @@ def BinarySearchInList(_list, item):
 
 def BinarySearch(_list, item):
 
-    '''fución que recibe una lista y un item para buscar en dicha lista
-       se realiza una busqueda binaria en cada una de las llaves
+    '''función que recibe una lista y un item para buscar en dicha lista
+       se realiza una búsqueda binaria en cada una de las llaves
        y cuando se encuentre la primera coincidencia se llama dos
        métodos para comprobar si hay más elementos que coincidan
-       RETURN: lista de diccionarios que coincidan con la busqueda
+       RETURN: lista de diccionarios que coincidan con la búsqueda
        NOTA: busca tanto en nombre como en álbum, autor, año, etc...
        NOTA2: se descontinuó la función porque solo funciona si el item
        coincide al 100% con los elementos de los diccionario y no
-       fuiciona si solo se pone un pedazo. Se cambió por la función
+       funciona si solo se pone un pedazo. Se cambió por la función
        SearchItemInDict.'''
 
     elementsFound = []
     for key in _list[0].keys(): # recorre la lista mirando cada una de las llaves
         soartedList = SortList(_list, key) #organiza la lista de acuerdo a la llaves
-        first = 0                          #para realizar la busqueda bien
+        first = 0                          #para realizar la búsqueda bien
         last = len(soartedList)-1
         found = False
         while first <= last and not found:
@@ -147,9 +147,9 @@ def BinarySearch(_list, item):
                 sameItemLeft = CheckLeft(soartedList, middle, item, key)-1
                                 #revisa cuantos elementos a la derecha de _lista tambien coinciden
                 elementsFound = soartedList[middle-sameItemLeft:middle+sameItemRight]
-                                #solo toma el intervalo de _list donde coincide la busqueda
+                                #solo toma el intervalo de _list donde coincide la búsqueda
                 found = True #rompe con el bucle y se va a la siguiente clave
-            else: # acorta el intervalo de busqueda
+            else: # acorta el intervalo de búsqueda
                 if item < soartedList[middle][key]:
                     last = middle - 1
                 else:
@@ -158,11 +158,11 @@ def BinarySearch(_list, item):
 
 def CheckRight(_list, index, item, key):
 
-    '''fución que revisa índice por índice si los elementos
+    '''función que revisa índice por índice si los elementos
        a la derecha de la primera coincidencia también coinciden.
        RETURN: int del numero de elementos a la derecha
-       que coinciden con la busqueda.
-       NOTA: fución exclusiva para el fucionamiento de BinarySearch.'''
+       que coinciden con la búsqueda.
+       NOTA: función exclusiva para el fucionamiento de BinarySearch.'''
 
     if _list[index][key] != item:
         return 0
@@ -174,11 +174,11 @@ def CheckRight(_list, index, item, key):
 
 def CheckLeft(_list, index, item, key):
 
-    '''fución que revisa índice por índice si los elementos
+    '''función que revisa índice por índice si los elementos
        a la izquierda de la primera coincidencia también coinciden
-       RETURN: int del numero de elementos a la izquierda.
-       que coinciden con la busqueda.
-       NOTA: fución exclusiva para el fucionamiento de BinarySearch.'''
+       RETURN: int del número de elementos a la izquierda.
+       que coinciden con la búsqueda.
+       NOTA: función exclusiva para el fucionamiento de BinarySearch.'''
 
     if _list[index][key] != item:
         return 0

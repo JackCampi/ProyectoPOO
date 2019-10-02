@@ -1,4 +1,4 @@
-"""Módulo files, maneja todo lo relacionado con los archivos y a
+"""Módulo files, maneja todo lo relacionado con los archivos y la
     representación interna de los elementos"""
 import os
 
@@ -51,7 +51,7 @@ def ReadFormat(_format, name="Main_list.txt"):
     "videos."
     name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
     si se desea cambiar la lista predetermina debe escribir
-    "pictures\nombre.txt."
+    "playlists\nombre.txt."
 
     salida:
     Una lista de python en donde cada elemento es un diccionario representando
@@ -72,9 +72,9 @@ def WriteList(_list, _format, name="Main_list.txt"):
     """
     Recibe una lista de diccionarios, el formato, y el nombre de archivo de una lista.
     No devuelve nada, solo sobrescribe la información de la lista de diccionarios en el archivo.
-    :param _list: lista de diccionarios.
-    :param _format: Tipo de archivo
-    :param name: Nombre de archivo.
+    :param _list: lista de diccionarios (ver ReadFormat).
+    :param _format: Tipo de archivo (ver ReadFormat).
+    :param name: Nombre del archivo.
     :return: None
     """
     root = _format
@@ -90,12 +90,13 @@ def GetOrderedValue(entry):
     del elemento "name" en la entrada-diccionario.
 
     parámetros de entrada:
-    entry -- Un diccionario que contiene la información de una entrada.
+    entry -- Un diccionario que contiene la información de una entrada (ver ReadFormat).
 
     salida:
     Un entero que trata de cuantificar el orden que debería tener el elemento
     en una lista.
     """
+    # TODO: Mejorar esta función.
     ans = 0
     letters = "abcdefghijklmnñopqrstuvwxyz"
     numbers = "0123456789"
@@ -114,8 +115,8 @@ def GetNewPosition(entry, entries):
     su puntaje de la función GetOrderedValue.
 
     parámetros de entrada:
-    entry -- Un diccionario que contiene la información de una entrada.
-    entries -- Una lista de entradas.
+    entry -- Un diccionario que contiene la información de una entrada (ver ReadFormat).
+    entries -- Una lista de entradas (ver ReadFormat).
 
     salida:
     Un entero que representa la posición en donde debería ir la nueva entrada.
@@ -135,12 +136,12 @@ def AddEntry(newEntry, _format, name="Main_list.txt"):
     añade la nueva entrada a la lista.
 
     parámetros de entrada:
-    newEntry -- Entrada que será agregada (dict).
+    newEntry -- Entrada que será agregada (dict, ver ReadFormat).
     _format -- El formato de la lista, puede ser "music", "pictures", o
     "videos."
     name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
     si se desea cambiar la lista predetermina debe escribir
-    "playlists\nombre.txt."
+    "playlists\nombre.txt".
 
     salida:
     No hay salida, solo modifica el archivo.
@@ -156,12 +157,12 @@ def DeleteEntry(entry, _format, name="Main_list.txt"):
     elimina la entrada a la lista.
 
     parámetros de entrada:
-    entry -- Entrada que será agregada (dict).
+    entry -- Entrada que será agregada (dict, ver ReadFormat).
     _format -- El formato de la lista, puede ser "music", "pictures", o
     "videos."
     name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
     si se desea cambiar la lista predetermina debe escribir
-    "playlists\nombre.txt."
+    "playlists\nombre.txt".
 
     salida:
     No hay salida, solo modifica el archivo.
@@ -181,8 +182,8 @@ def ModifyList(newEntry, oldEntry, _format, name="Main_list.txt"):
     No devuelve nada, pero sobrescribe la información de la nueva entrada en la vieja entrada.
 
     parámetros de entrada:
-    newEntry: Nueva entrada (dict).
-    oldEntry: Vieja entrada (dict).
+    newEntry: Nueva entrada (dict, ver ReadFormat).
+    oldEntry: Vieja entrada (dict, ver ReadFormat).
     _format -- El formato de la lista, puede ser "music", "pictures", o "videos."
     name -- El nombre del archivo de la lista, por defecto es "Main_list.txt,
     si se desea cambiar la lista predetermina debe escribir
@@ -198,6 +199,8 @@ def ModifyList(newEntry, oldEntry, _format, name="Main_list.txt"):
 def MakePlaylist(_format, name):
     """
     Recibe el formato y el nombre de una lista de reproducción, para crear su archivo asociado.
+
+    parámetros de entrada:
     :param _format: Formato de la lista
     :param name: Nombre del archivo, sin el txt
     :return: None
@@ -223,7 +226,6 @@ def GetPlaylists(_format):
     """Recibe un formato y devuelve una lista con cadenas indicando el nombre de archivo de todas
     las playlist del formato.
     :param _format: Formato, ver ReadFormat.
-    :type _format: str
     """
     path = _format + os.sep + "playlists"
     ans = []
@@ -232,41 +234,3 @@ def GetPlaylists(_format):
             if file.endswith(".txt"):
                 ans.append(file[:-4])
     return ans
-
-
-#### Tests
-
-
-#print(GetPlaylists("music"))
-
-"""
-import MainListTest
-
-music = MainListTest.GetList()
-
-for i in music:
-    AddEntry(i, "music")
-
-new_song = MakeEntry("all you need is love¬the beatles¬magical mystery tour¬1967¬rock")
-old_song = {"name":"waiting for love","author":"avicii","album":"stories","year":2015,"type":"electronica"}
-to_delete = {"name":"ajena","author":"eddy herrera","album":"atrevido","year":2001,"type":"merengue"}
-ModifyList(new_song, old_song, "music")
-DeleteEntry(to_delete, "music")
-
-
-MakePlaylist("pictures", "musica_en_fotosxd")
-for i in music:
-    AddEntry(i, "pictures", "playlists\musica_en_fotosxd.txt")
-
-
-for i in ReadFormat("music"):
-    print(GetOrderedValue(i))
-
-print("------------------------")
-for i in ReadFormat("music"):
-    print(GetNewPosition(i, ReadFormat("music")))
-
-
-
-DeletePlaylist("pictures", "musica_en_fotosxd")
-"""
