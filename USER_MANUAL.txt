@@ -64,7 +64,48 @@ el nombre, hasta el nombre del archivo**. Si usted desconoce algún dato, puede
 dejar el campo en blanco, sin embargo, esto no es recomendable.
 
   CUARTO MENÚ -> LISTAS DE REPRODUCCIÓN.
+El menú de listas de reproducción funciona de manera similar al menú anterior.
+Desde este menú usted podrá buscar, crear, modificar y eliminar listas de
+reproducción.
 
+1. Mis listas.
+2. Crear lista.
+3. Buscar lista.
+4. Eliminar lista.
+
+0. Atrás.
+
+Nota: Las listas de reproducción sólo almacenan elementos de un mismo formato.
+
+Cuando selecciona una lista de reproducción, usted dispondrá de otro menú donde
+se despliegan más opciones específicas para listas.
+
+  MENÚ DE LISTAS DE REPRODUCCIÓN.
+En este menú usted podrá ver el contenido de las listas. Asímismo, tendrá la
+opción de añadir, buscar o eliminar una canción, o bien, eliminar la lista.
+
+1. Ver contenido de la lista.
+2. Añadir un elemento.
+3. Eliminar un elemento.
+4. Eliminar lista de reproducción.
+
+0. Atrás.
+
+  MENÚS DE BÚSQUEDA.
+Cuando tenga que buscar algún elemento o lista, el programa le pedirá alguna
+palabra clave de lo que usted quiera encontrar. En el caso de haber más de un
+elemento encontrado, usted tendrá que escoger alguno introduciendo el número de
+dicho elemento y pulsando ENTER.
+
+
+
+
+
+Equipo de desarrolladores:
+- Juan Pablo Delgado.
+- Elkin Quiñones Mosquera.
+- Brayan Daniel Romero Ardila.
+- Daniel Felipe Quiroga Parra.
 
 
 * Debe tener instalada la versión 3.7.3 de Python en su equipo.
