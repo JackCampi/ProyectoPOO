@@ -1,0 +1,73 @@
+
+                         GESTOR DE MULTIMEDIA
+                           MANUAL DE USUARIO
+
+
+Bienvenido al gestor de multimedia, este programa le permitirá almacenar sus
+archivos multimedia como música, fotos o videos, y poder manejarlos de manera
+que pueda ordenarlos y visualizarlos con mayor facilidad. Para ejecutarlo, debe
+abrir el archivo (NOMBRE DEL ARCHIVO) *, donde se encontrará con el menú
+principal del programa. Allí podrá visualizar las diferentes opciones que
+dispone para comenzar a utilizar el programa.
+
+  MENÚ PRINCIPAL.
+Al iniciar el programa usted entrará en un menú principal donde tendrá que
+escoger el formato al que desee escoger (música, fotos o videos). Para ello,
+debe escribir sólamente el número de la opción y presionar la tecla ENTER.
+Inmediatamente, el programa lo llevará a un segundo menú que puede variar según
+el formato escogido.
+
+1. Música.
+2. Fotos.
+3. Videos.
+
+0. Atrás.
+
+Nota: para cerrar el programa debe escoger la opción "0. Atrás" y reponder
+ "si".
+
+Los ejemplos que se mostrarán a continuación se mostrarán para la opción de
+música, sin embargo, la estructura de los menús seguirá siendo la misma.
+
+
+ SEGUNDO MENÚ.
+Una vez escogido el formato, el programa lo llevará a un segundo menú donde
+usted deberá escoger si desea visualizar todos sus archivos, o bien, las listas
+de reproducción.
+
+1. Mi música.
+2. Listas de reproducción.
+
+0. Atrás.
+
+  La primera opción lo llevará a un tercer menú donde podrá ver sus canciones, añadir
+una nueva canción o buscar alguna en específico. La segunda opción lo llevará a
+un cuarto menú que le dará las diferentes opciones que dicpondrá para las Listas
+de reproducción, tales como ver las listas, añadir una lista, eliminarla, entre
+otras.
+
+  TERCER MENÚ -> MI MÚSICA
+En este menú, usted tendrá la opción de ver su música de manera ordenada (ya sea
+por nombre, por artista, por álbum, o por algúna otra característica). También
+tendrá la oportunidad de buscar una canción o de añadir una nueva.
+
+1. Ver mi música.
+2. Buscar.
+3. Añadir.
+
+0. Atrás.
+
+Nota: Para buscar un elemento, se recomienda introducir las palabras exactas de
+lo que desea encontrar.
+Nota 2: Al añadir un elemento, el programa le pedirá los datos uno por uno, Desde
+el nombre, hasta el nombre del archivo**. Si usted desconoce algún dato, puede
+dejar el campo en blanco, sin embargo, esto no es recomendable.
+
+  CUARTO MENÚ -> LISTAS DE REPRODUCCIÓN.
+
+
+
+* Debe tener instalada la versión 3.7.3 de Python en su equipo.
+** Esta versión del programa no permite abrir los archivos de los elementos, sin
+embargo, es importante que introduzca manualmente el nombre o la ruta del elemento
+junto a su debida extensión (".mp3",".JPEG",".avi", etc.).
