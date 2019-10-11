@@ -52,7 +52,7 @@ def LogOut():
 
 
 # Se cambia el directorio en la ubicación del programa para un correcto manejo de archivos.
-# Esto es debido a que cuando pythoun archivo de python se ejecuta sin el uso de un IDE usa su directorio de
+# Esto es debido a que cuando un archivo de python se ejecuta sin el uso de un IDE usa su directorio de
 # trabajo como la ubicación de la instalación de python, mientras que un IDE usa la ubicación del archivo
 newPath = os.path.dirname(os.path.abspath(__file__))
 os.chdir(newPath)

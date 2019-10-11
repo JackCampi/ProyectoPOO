@@ -17,6 +17,7 @@ def SortMainList(_format, key):
     mainList = files.ReadFormat(_format) # función creada por Juan
     return SortList(mainList, key)
 
+
 def SortList(_list, key):
 
     '''función que recibe una lista, bien sea la Main_list o una playlist
@@ -30,6 +31,7 @@ def SortList(_list, key):
         raise NameError("Invalid key, please check if the key is correct")
         #si la clave dada es erronea se levanta un error
 
+
 def SearchMainList(_format, item):
 
     '''función que llama al método ReadFormat para obtener la Main_list
@@ -41,6 +43,7 @@ def SearchMainList(_format, item):
     #mainList = SortMainList("music","name") # esto llama a la Main_list de prueba
     mainList = files.ReadFormat(_format) # función creada por Juan
     return SearchItemInDict(mainList, item)
+
 
 def SearchItemInDict(_list, item):
 
@@ -63,6 +66,7 @@ def SearchItemInDict(_list, item):
     cleanedSoartedList = SortList(cleanedList, "name") #organiza el resultado por nombres
     return cleanedSoartedList
 
+
 def CleanList(_list):
 
     '''función que recibe una lista y elimina todos los elementos repetidos.
@@ -73,6 +77,7 @@ def CleanList(_list):
         if _list[i] not in cleanedList:
             cleanedList.append(_list[i])
     return cleanedList
+
 
 def SearchItemInList(_list, item):
 
@@ -95,6 +100,7 @@ def SearchItemInList(_list, item):
                     en un futuro pueden servir.
                     NOTA: algunas no son del todo funcionales. Se retomará
                     cuando sean requeridas.'''
+
 
 def BinarySearchInList(_list, item):
 
@@ -119,6 +125,7 @@ def BinarySearchInList(_list, item):
             else:
                 first = middle + 1
     return elementsFound
+
 
 def BinarySearch(_list, item):
 
@@ -156,6 +163,7 @@ def BinarySearch(_list, item):
                     first = middle + 1
     return elementsFound
 
+
 def CheckRight(_list, index, item, key):
 
     '''función que revisa índice por índice si los elementos
@@ -171,6 +179,7 @@ def CheckRight(_list, index, item, key):
             return 1
         else:
             return 1 + CheckRight(_list, index + 1, item, key)
+
 
 def CheckLeft(_list, index, item, key):
 

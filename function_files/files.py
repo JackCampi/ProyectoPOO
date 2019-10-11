@@ -85,52 +85,6 @@ def WriteList(_list, _format, name="Main_list.txt"):
     fileHandler.close()
 
 
-def GetOrderedValue(entry):
-    """Recibe un diccionario y devuelve un entero que representa el ranking
-    del elemento "name" en la entrada-diccionario.
-
-    parámetros de entrada:
-    entry -- Un diccionario que contiene la información de una entrada (ver ReadFormat).
-
-    salida:
-    Un entero que trata de cuantificar el orden que debería tener el elemento
-    en una lista.
-    """
-    # TODO: Mejorar esta función.
-    ans = 0
-    letters = "abcdefghijklmnñopqrstuvwxyz"
-    numbers = "0123456789"
-    for i in entry["name"]:
-        if i in letters:
-            ans += letters.index(i)
-        elif i in numbers:
-            ans += numbers.index(i)
-
-    return ans
-
-
-def GetNewPosition(entry, entries):
-    """Recibe un diccionario y una lista de entradas, devuelve la posición en
-    donde debería estar la entrada en la lista de entradas, teniendo en cuenta
-    su puntaje de la función GetOrderedValue.
-
-    parámetros de entrada:
-    entry -- Un diccionario que contiene la información de una entrada (ver ReadFormat).
-    entries -- Una lista de entradas (ver ReadFormat).
-
-    salida:
-    Un entero que representa la posición en donde debería ir la nueva entrada.
-    """
-    k = GetOrderedValue(entry)
-    n = 0
-    for i in entries:
-        if GetOrderedValue(i) >= k:
-            break
-        else:
-            n += 1
-    return n
-
-
 def AddEntry(newEntry, _format, name="Main_list.txt"):
     """Recibe una entrada, un formato y el nombre de archivo de una lista y
     añade la nueva entrada a la lista.
@@ -147,8 +101,8 @@ def AddEntry(newEntry, _format, name="Main_list.txt"):
     No hay salida, solo modifica el archivo.
     """
     entries = ReadFormat(_format, name)
-    n = GetNewPosition(newEntry, entries)
-    entries.insert(n, newEntry)
+    entries.append(newEntry)
+    sorted(entries, key=lambda entries: entries["name"])
     WriteList(entries, _format, name)
 
 
